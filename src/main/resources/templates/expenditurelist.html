@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Customer Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f1e1;
+        }
+
+        
+
+       
+    </style>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function filterTable() {
+            let input = document.getElementById('searchInput'); // Get the search input
+            let filter = input.value.toLowerCase(); // Convert input to lowercase for case-insensitive search
+            let table = document.querySelector('table'); // Get the table element
+            let rows = table.getElementsByTagName('tr'); // Get all rows in the table
+
+            // Loop through the rows and hide the ones that don't match the search query
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName('td');
+                let expenceName = cells[1] ? cells[1].textContent.toLowerCase() : ''; // Get the customer Name cell text
+
+                if (expenceName.indexOf(filter) > -1) {
+                    rows[i].style.display = ''; // Show the row if it matches the filter
+                } else {
+                    rows[i].style.display = 'none'; // Hide the row if it doesn't match
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PB Manager</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Capital</a>
+        <a href="#">Locations</a>
+        <a href="#">Production</a>
+        <a href="#">Stock</a>
+        <a href="#">Sales</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        
+        
+        <div class="form-container">
+            <h2>Expenditures</h2>
+            <form th:action="@{/expenditures}" method="get">
+               <label for="batchID">Filter by Batch:</label>
+    <select name="batchID" id="batchID">
+        <option value="">-- All Batches --</option>
+        <th:block th:each="batch : ${batches}">
+            <option th:value="${batch.batchID}" 
+                    th:text=" 'batch # ' + ${batch.batchID} + 'date: ' + ${batch.receivedDate}"
+                    th:selected="${batch.batchID == selectedBatchID}"></option>
+        </th:block>
+    </select>
+        
+
+
+                <button type="submit">Filter</button>
+                
+
+            </form>
+        </div>
+
+        <div class="table-container">
+            <h3>expenditures</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>batch ID</th>
+                        <th>expence type</th>
+                        <th> Amount Spent</th>                        
+                        <th> date</th>
+                                              
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="expenditure : ${expenditures}">
+                        <td th:text="${expenditure.batch.batchID}"></td>
+                        <td th:text="${expenditure.expence.expenceName}"></td>
+                        <td th:text="${expenditure.amountSpent}"></td>
+                        <td th:text="${expenditure.expenditureDate}"></td>
+
+                        
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

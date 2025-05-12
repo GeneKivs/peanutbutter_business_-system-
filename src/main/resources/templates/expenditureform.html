@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - expenditure Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f1e1;
+        }
+
+    </style>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PB Manager</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Capital</a>
+        <a href="#">Production</a>
+        <a href="#">Stock</a>
+        <a href="#">Sales</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Create Expenditure</h2>
+            <form th:action="@{/saveExpenditure}" method="post">
+                <label for="batchID">  Batch :</label>
+                <select name="batchID" required>
+                    <option value="">Select batch</option>
+                    <option th:each="batch: ${batches}" th:value="${batch.batchID}" th:text="'Batch # ' + ${batch.batchID}  + ' date:'  + ${batch.receivedDate}"></option>
+                 </select>
+
+
+                 <!-- List of expences with checkboxes and input for amount -->
+    <div th:each="expence : ${expences}">
+        <input type="checkbox" name="expenceIDs" th:value="${expence.expenceID}" />
+        <span th:text="${expence.expenceName}"></span>
+        <input type="number" step="0.01" min="0" 
+               th:name="'amount_' + ${expence.expenceID}" 
+               placeholder="Amount Spent" />
+    </div>
+
+        <br>
+
+                <button type="submit">Save Expenditure</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Expence Definition Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f1e1;
+        }
+
+        
+
+       
+    </style>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PB Manager</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Capital</a>
+        <a href="#">Production</a>
+        <a href="#">Stock</a>
+        <a href="#">Sales</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Expence Definition</h2>
+            <form th:action="@{/saveExpence}" method="post">
+                <label for="expenceName">Expence Name</label>
+                <input type="text" id="expenceName" name="expenceName" required>
+
+                
+
+                <label for="description" >Expence Description</label>
+                <textarea name="description" id="description" rows="3" ></textarea>
+        
+
+
+                <button type="submit">Save expence type</button>
+                
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

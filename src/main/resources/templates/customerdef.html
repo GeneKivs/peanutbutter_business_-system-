@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Customer Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f1e1;
+        }
+
+    </style>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PB Manager</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Capital</a>
+        <a href="#">Production</a>
+        <a href="#">Stock</a>
+        <a href="#">Sales</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Customer Definition</h2>
+            <form th:action="@{/saveCustomer}" method="post">
+                <label for="firstrName">First Name</label>
+                <input type="text" id="firtName" name="firstName" required>
+
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+
+                <label for="locationID">location Name</label>
+                    <select name="location.locationID" required>
+                        <option value="">Select location</option>
+                        <option th:each="location : ${locations}" th:value="${location.locationID}" th:text="${location.locationName}"></option>
+                    </select>
+                <label for="phoneNumber">Contact Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]{10}">
+
+                <button type="submit">Save Customer</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

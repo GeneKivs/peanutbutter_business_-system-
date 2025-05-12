@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Customer Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f1e1;
+        }
+
+    </style>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PB Manager</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Capital</a>
+        <a href="#">Production</a>
+        <a href="#">Stock</a>
+        <a href="#">Sales</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Receive Peanutbutter</h2>
+            <form th:action="@{/saveBatch}" method="post">
+                <label for="peanutQuantity">peanut Quantity(Kg) </label>
+                <input type="number" id="peanutQuantity" name="peanutQuantity" required>
+
+                <label for="amountPaid">Amount  Paid</label>
+                <input type="number" id="amountPaid" name="amountPaid" required>
+
+                <h3>Products Produced in this Batch:</h3>
+
+        <!-- Loop over all products passed from the controller -->
+        <div th:each="product : ${products}">
+            <input type="checkbox"
+                   th:name="product"
+                   th:value="${product.productID}"
+                   th:id="'product_' + ${product.productID}" />
+
+            <!-- Display product name -->
+            <label th:for="'product_' + ${product.productID}" th:text="${product.productName}"></label>
+
+            <!-- Quantity input for the selected product -->
+            <input type="number"
+                   min="0"
+                   th:name="'quantity_' + ${product.productID}"
+                   placeholder="Quantity"
+                   style="margin-left: 10px;" />
+            <br>
+        </div>
+
+        <br>
+
+                <button type="submit">Save Batch</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Payment Form</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f1e1;
+        }
+
+        
+
+       
+    </style>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function filterTable() {
+            let input = document.getElementById('searchInput'); // Get the search input
+            let filter = input.value.toLowerCase(); // Convert input to lowercase for case-insensitive search
+            let table = document.querySelector('table'); // Get the table element
+            let rows = table.getElementsByTagName('tr'); // Get all rows in the table
+
+            // Loop through the rows and hide the ones that don't match the search query
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName('td');
+                let paymentName = cells[1] ? cells[1].textContent.toLowerCase() : ''; // Get the payment Name cell text
+
+                if (paymentName.indexOf(filter) > -1) {
+                    rows[i].style.display = ''; // Show the row if it matches the filter
+                } else {
+                    rows[i].style.display = 'none'; // Hide the row if it doesn't match
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PB Manager</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Capital</a>
+        <a href="#">Locations</a>
+        <a href="#">Production</a>
+        <a href="#">Stock</a>
+        <a href="#">Sales</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="tab-buttons">
+            <button ><a th:href="@{/paymentdef}">Add Payment Type</a></button>
+            
+        </div>
+        <div class="search-bar">
+            <label for="searchInput">Search Payment:</label>
+            <input type="text" id="searchInput" placeholder="Search for payment..." onkeyup="filterTable()">
+        </div>
+        <div class="table-container">
+            <h3>Payment types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>payment ID</th>
+                        <th>payment Type</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="payment : ${payments}">
+                        <td th:text="${payment.paymentID}"></td>
+                        <td th:text="${payment.paymentType}"></td>
+                        
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

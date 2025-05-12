@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Product List</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f1e1;
+        }
+
+        
+
+       
+    </style>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function filterTable() {
+            let input = document.getElementById('searchInput'); // Get the search input
+            let filter = input.value.toLowerCase(); // Convert input to lowercase for case-insensitive search
+            let table = document.querySelector('table'); // Get the table element
+            let rows = table.getElementsByTagName('tr'); // Get all rows in the table
+
+            // Loop through the rows and hide the ones that don't match the search query
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName('td');
+                let productName = cells[1] ? cells[1].textContent.toLowerCase() : ''; // Get the product Name cell text
+
+                if (productName.indexOf(filter) > -1) {
+                    rows[i].style.display = ''; // Show the row if it matches the filter
+                } else {
+                    rows[i].style.display = 'none'; // Hide the row if it doesn't match
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>PB Manager</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Capital</a>
+        <a href="#">Locations</a>
+        <a href="#">Production</a>
+        <a href="#">Stock</a>
+        <a href="#">Sales</a>
+        <a href="#">Customers</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <div class="main-content">
+        <div class="tab-buttons">
+            <button ><a th:href="@{/productdef}">Add product</a></button>
+            
+        </div>
+        <div class="search-bar">
+            <label for="searchInput">Search product:</label>
+            <input type="text" id="searchInput" placeholder="Search for a product..." onkeyup="filterTable()">
+        </div>
+        <div class="table-container">
+            <h3>products</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>product ID</th>
+                        <th>product Name</th>
+                        <th> quantity in stock</th>
+                        <th>unit</th>   
+                        <th>reorder level</th>                     
+                        <th> price per tin</th>
+                        <th>Actions</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product: ${products}">
+                        <td th:text="${product.productID}"></td>
+                        <td th:text="${product.productName}"></td>
+                        <td th:text="${product.quantityInStock}"></td>
+                        <td th:text="${product.unit.unitAbbriviation}"></td>
+                        <td th:text="${product.reorderLevel}"></td>
+                        <td th:text="${product.pricePerTin}"></td>
+
+                        
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
