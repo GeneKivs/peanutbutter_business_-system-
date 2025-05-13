@@ -24,6 +24,9 @@ public class ProductService {
         return productRepository.findAll();
     }
     
+    public Product getProductByID(int productID){
+        return productRepository.findById(productID).orElse(null);
+    }
     public void updateProduct(Product product){
         productRepository.save(product);
     }

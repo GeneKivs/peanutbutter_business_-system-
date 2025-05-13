@@ -49,7 +49,7 @@ public class ExenditureController {
                                     @RequestParam(value = "expenceIDs")List<Integer> expenceIDs,
                                     HttpServletRequest request, RedirectAttributes redirectAttributes){
         expenditureService.definexpenditure(batchID, expenceIDs, request);
-        return "redirect:/expendituredef";
+        return "redirect:/expenditures";
     }
 
     @GetMapping("/expenditures")
@@ -66,6 +66,7 @@ public class ExenditureController {
             expenditures = expenditureService.getAllExpenditures();
         }
         model.addAttribute("expenditures", expenditures);
+        
         return "expenditurelist";
     }
 

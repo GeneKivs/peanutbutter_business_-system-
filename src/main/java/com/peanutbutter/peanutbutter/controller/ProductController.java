@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.peanutbutter.peanutbutter.model.Product;
@@ -46,6 +47,31 @@ public class ProductController {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
         return "productlist";
+    }
+
+    @GetMapping("/productpricedef")
+    public String showProductPricedefinition(Model model){
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "productpricedef";
+    }
+
+    @PostMapping("/saveProductPrice")
+    public String saveProductPrice(@RequestParam("productID")Integer productID,
+                                    @RequestParam("pricePerTin")double pricePerTin,
+                                    RedirectAttributes redirectAttributes){
+
+        Product product = productService.getProductByID(productID);
+
+        if(product != null){
+            //update the productprice
+            product.setPricePerTin(pricePerTin);
+            productService.updateProduct(product);
+            redirectAttributes.addFlashAttribute("successMessage", "Product price updated successfully.");
+        }else{
+            redirectAttributes.addFlashAttribute("errorMessage", "Product not found.");
+        }
+        return "redirect:/products";
     }
 
 }
