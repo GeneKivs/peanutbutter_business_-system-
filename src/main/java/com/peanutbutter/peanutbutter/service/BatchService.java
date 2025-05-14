@@ -1,6 +1,7 @@
 package com.peanutbutter.peanutbutter.service;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.peanutbutter.peanutbutter.model.Batch;
 import com.peanutbutter.peanutbutter.model.BatchProduct;
 import com.peanutbutter.peanutbutter.model.Product;
+import com.peanutbutter.peanutbutter.model.enums.BatchStatus;
 import com.peanutbutter.peanutbutter.repository.BatchProductRepository;
 import com.peanutbutter.peanutbutter.repository.BatchRepository;
 import com.peanutbutter.peanutbutter.repository.ProductRepository;
@@ -28,7 +30,7 @@ public class BatchService {
     @Autowired
     private BatchRepository batchRepository;
 
-    public void defineBatch(int peanutQuantity,double amountPaid,String[] productIds, HttpServletRequest request){
+    public void defineBatch(int peanutQuantity,BigDecimal amountPaid,String[] productIds, HttpServletRequest request){
         //create new batch
         Batch batch = new Batch();
         batch.setPeanutQuantity(peanutQuantity);
@@ -69,6 +71,9 @@ public class BatchService {
         //update the batch with the total tins and remaining quantity
         batch.setTotalTins(totalTins);
         batch.setRemainingQuantity(totalTins);
+
+        //update the batch status to available
+        batch.setBatchStatus(BatchStatus.AVAILABLE);
         //save the batch again to update the total tins and remaining quantity
         batchRepository.save(batch);
     }

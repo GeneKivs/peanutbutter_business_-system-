@@ -1,5 +1,6 @@
 package com.peanutbutter.peanutbutter.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,16 +59,21 @@ public class ProductController {
 
     @PostMapping("/saveProductPrice")
     public String saveProductPrice(@RequestParam("productID")Integer productID,
-                                    @RequestParam("pricePerTin")double pricePerTin,
+                                    @RequestParam("pricePerTin")String pricePerTinStr,
                                     RedirectAttributes redirectAttributes){
 
         Product product = productService.getProductByID(productID);
 
         if(product != null){
+            try{
+                BigDecimal pricePerTin = new BigDecimal(pricePerTinStr);
             //update the productprice
             product.setPricePerTin(pricePerTin);
             productService.updateProduct(product);
             redirectAttributes.addFlashAttribute("successMessage", "Product price updated successfully.");
+            }catch(NumberFormatException e){
+                redirectAttributes.addFlashAttribute("errorMessage", "Invalid price format.");
+            }
         }else{
             redirectAttributes.addFlashAttribute("errorMessage", "Product not found.");
         }

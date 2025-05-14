@@ -1,5 +1,6 @@
 package com.peanutbutter.peanutbutter.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class ExpenditureService {
                 String amountStr = request.getParameter(paramName);
 
                 if(amountStr !=null && !amountStr.isEmpty()){
-                    double amountSpent = Double.parseDouble(amountStr);
+                    BigDecimal amountSpent = new BigDecimal(amountStr);
 
                     Expence expence = expenceService.getExpenceByID(expenceID);
 

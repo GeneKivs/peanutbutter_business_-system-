@@ -1,6 +1,9 @@
 package com.peanutbutter.peanutbutter.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import com.peanutbutter.peanutbutter.model.enums.BatchStatus;
 
 import jakarta.persistence.*;
 
@@ -14,8 +17,60 @@ public class Batch {
     private LocalDate receivedDate;
     private int totalTins;
     private int peanutQuantity;
-    private double amountPaid;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal amountPaid;
     private int RemainingQuantity;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal revenue;
+    
+   @Enumerated(EnumType.STRING)
+    private BatchStatus batchStatus;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal profit;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal totalExpenditure;
+    
+    private LocalDate endDate;
+
+     public BatchStatus getBatchStatus() {
+    return batchStatus;
+}
+   public void setBatchStatus(BatchStatus batchStatus) {
+    this.batchStatus = batchStatus;
+   }
+
+    public BigDecimal getTotalExpenditure() {
+        return totalExpenditure;
+    }
+    public void setTotalExpenditure(BigDecimal totalExpenditure) {
+        this.totalExpenditure = totalExpenditure;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate; 
+    }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+     public BigDecimal getProfit() {
+        return profit;
+    }
+
+    public void setProfit(BigDecimal profit ){
+        this.profit = profit;
+    }
+
+
+ public BigDecimal getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(BigDecimal revenue) {
+        this.revenue = revenue;
+    }
+    
 
     public int getRemainingQuantity() {
         return RemainingQuantity;
@@ -57,11 +112,11 @@ public class Batch {
         this.peanutQuantity =peanutQuantity;
     }
 
-    public double getAmountPaid(){
+    public BigDecimal getAmountPaid(){
         return amountPaid;
     }
 
-    public void setAmountPaid(double amountPaid){
+    public void setAmountPaid(BigDecimal amountPaid){
         this.amountPaid = amountPaid;
     }
 

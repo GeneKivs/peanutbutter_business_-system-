@@ -1,5 +1,7 @@
 package com.peanutbutter.peanutbutter.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,7 +16,8 @@ public class Product {
 
     private int quantityInStock;
 
-    private double pricePerTin;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal pricePerTin;
 
     private int reorderLevel;
 
@@ -54,11 +57,11 @@ public class Product {
         this.quantityInStock = stock;
     }
 
-    public double getPricePerTin(){
+    public BigDecimal getPricePerTin(){
         return pricePerTin;
     }
 
-    public void setPricePerTin(double price){
+    public void setPricePerTin(BigDecimal price){
         this.pricePerTin = price;
     }
 

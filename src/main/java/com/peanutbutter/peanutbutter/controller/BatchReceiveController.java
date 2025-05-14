@@ -1,5 +1,6 @@
 package com.peanutbutter.peanutbutter.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class BatchReceiveController {
     public String saveBatch(HttpServletRequest request){
         //extract the peanut quantity paid from form fields
         int peanutQuantity = Integer.parseInt(request.getParameter("peanutQuantity"));
-        double amountPaid = Double.parseDouble(request.getParameter("amountPaid"));
+        BigDecimal amountPaid = new BigDecimal(request.getParameter("amountPaid"));
 
         //get all selected product IDs 
         String[] productIds = request.getParameterValues("product");

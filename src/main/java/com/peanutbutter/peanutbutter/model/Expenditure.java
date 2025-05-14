@@ -1,5 +1,6 @@
 package com.peanutbutter.peanutbutter.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
@@ -20,7 +21,9 @@ public class Expenditure {
     @JoinColumn(name = "batchID")
     private Batch batch;
     private LocalDate expenditureDate;
-    private double amountSpent;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal amountSpent;
 
     public long getExpenditureID(){
         return expenditureID;
@@ -53,11 +56,11 @@ public class Expenditure {
         this.expenditureDate = date;
     }
 
-    public double getAmountSpent(){
+    public BigDecimal getAmountSpent(){
         return amountSpent;
     }
 
-    public void setAmountSpent(double amountSpent){
+    public void setAmountSpent(BigDecimal amountSpent){
         this.amountSpent = amountSpent;
     }
 

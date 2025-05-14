@@ -1,5 +1,6 @@
 package com.peanutbutter.peanutbutter.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public void defineProduct(Product product){
-        product.setPricePerTin(0.0);
+        product.setPricePerTin(BigDecimal.ZERO);
         product.setQuantityInStock(0);
         productRepository.save(product);
     }
