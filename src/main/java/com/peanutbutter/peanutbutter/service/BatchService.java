@@ -55,6 +55,8 @@ public class BatchService {
                     batchProduct.setBatch(batch);
                     batchProduct.setProduct(product);
                     batchProduct.setProductQuantity(quantity);
+                    batchProduct.setProductRevenue(BigDecimal.ZERO);
+                    batchProduct.setProductRemQuantity(quantity);
 
                     batchProductRepository.save(batchProduct);
 
@@ -71,6 +73,11 @@ public class BatchService {
         //update the batch with the total tins and remaining quantity
         batch.setTotalTins(totalTins);
         batch.setRemainingQuantity(totalTins);
+
+        //update the batch profit, revenue and total expenditure
+        batch.setProfit(BigDecimal.ZERO);
+        batch.setRevenue(BigDecimal.ZERO);
+        batch.setTotalExpenditure(BigDecimal.ZERO);
 
         //update the batch status to available
         batch.setBatchStatus(BatchStatus.AVAILABLE);

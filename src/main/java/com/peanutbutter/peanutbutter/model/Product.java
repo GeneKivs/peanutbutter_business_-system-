@@ -2,6 +2,8 @@ package com.peanutbutter.peanutbutter.model;
 
 import java.math.BigDecimal;
 
+import com.peanutbutter.peanutbutter.model.enums.ProductStatus;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +22,17 @@ public class Product {
     private BigDecimal pricePerTin;
 
     private int reorderLevel;
+
+    @Enumerated(EnumType.STRING)
+    private ProductStatus productStatus;
+
+    public ProductStatus getProductStatus() {
+        return productStatus;
+    }
+
+    public void setProductStatus(ProductStatus productStatus) {
+        this.productStatus = productStatus;
+    }
 
     @ManyToOne
     @JoinColumn(name = "unitID")

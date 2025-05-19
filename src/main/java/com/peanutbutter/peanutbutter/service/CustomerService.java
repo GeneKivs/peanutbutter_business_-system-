@@ -18,6 +18,10 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
+    public Customer getCustomerByID(int customerID){
+        return customerRepository.findById(customerID).orElse(null);
+    }
+
     public List<Customer> getAllCuatomers(){
         return customerRepository.findAll();
     }

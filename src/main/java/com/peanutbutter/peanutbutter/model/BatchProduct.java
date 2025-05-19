@@ -1,5 +1,7 @@
 package com.peanutbutter.peanutbutter.model;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +21,24 @@ public class BatchProduct {
     private Product product;
 
     private int productQuantity;
+
+    private int productRemQuantity;
+
+    @Column(precision = 10, scale = 2)
+    private BigDecimal productRevenue;
+
+    public BigDecimal getProductRevenue() {
+        return productRevenue;
+    }
+    public void setProductRevenue(BigDecimal productRevenue) {
+        this.productRevenue = productRevenue;
+    }
+    public int getProductRemQuantity() {
+        return productRemQuantity;
+    }
+    public void setProductRemQuantity(int productRemQuantity) {
+        this.productRemQuantity = productRemQuantity;
+    }
     
     public int getProductQuantity() {
         return productQuantity;
