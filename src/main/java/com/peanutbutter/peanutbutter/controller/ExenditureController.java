@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.peanutbutter.peanutbutter.model.Batch;
 import com.peanutbutter.peanutbutter.model.Expence;
 import com.peanutbutter.peanutbutter.model.Expenditure;
+
 import com.peanutbutter.peanutbutter.service.BatchService;
 import com.peanutbutter.peanutbutter.service.ExpenceService;
 import com.peanutbutter.peanutbutter.service.ExpenditureService;
@@ -36,8 +37,12 @@ public class ExenditureController {
         Expenditure expenditure = new Expenditure();
         model.addAttribute("expenditure", expenditure);
 
-        List<Batch> batches = batchService.getAllBatches();
-        model.addAttribute("batches", batches);
+        List<Batch> batches = batchService.getAvailableBatches();
+        
+         model.addAttribute("batches", batches);
+            
+        
+       
 
         List<Expence> expences = expenceService.getALlExpences();
         model.addAttribute("expences", expences);

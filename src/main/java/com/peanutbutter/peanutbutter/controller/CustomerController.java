@@ -24,6 +24,14 @@ public class CustomerController {
     @Autowired
     private LocationService locationService;
 
+    @GetMapping("/customerDashboard")
+    public String showCustomerDashboard(Model model){
+        List <Customer> customers = customerService.getAllCuatomers();
+        model.addAttribute("customers", customers);
+        return "customerdashboard";
+         
+    }
+
     @GetMapping("/customerdef")
     public String showCustomerdefForm(Model model){
         Customer customer = new Customer();
@@ -47,5 +55,6 @@ public class CustomerController {
         model.addAttribute("customers", customers);
         return "customerlist";
     }
+
 
 }

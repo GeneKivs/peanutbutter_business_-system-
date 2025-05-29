@@ -25,6 +25,13 @@ public class ProductController {
 
     @Autowired
     private UnitService unitService;
+    
+    @GetMapping("/inventory")
+    public String showinventoryDash(Model model){
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "inventorydashboard";
+    }
 
     @GetMapping("/productdef")
     public String showProductdefForm(Model model){
@@ -40,15 +47,10 @@ public class ProductController {
     public String saveProduct(@ModelAttribute("product")Product product, RedirectAttributes redirectAttributes){
         
         productService.defineProduct(product);
-        return "redirect:/products";
+        return "redirect:/inventory";
     }
 
-    @GetMapping("/products")
-    public String showProductList(Model model){
-        List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
-        return "productlist";
-    }
+   
 
     @GetMapping("/productpricedef")
     public String showProductPricedefinition(Model model){
@@ -77,7 +79,7 @@ public class ProductController {
         }else{
             redirectAttributes.addFlashAttribute("errorMessage", "Product not found.");
         }
-        return "redirect:/products";
+        return "redirect:/inventory";
     }
 
 }

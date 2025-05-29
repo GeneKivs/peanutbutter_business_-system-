@@ -19,7 +19,7 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @GetMapping("paymentdef")
+    @GetMapping("/paymentdef")
     public String showPaymentDefForm(Model model){
         Payment payment = new Payment();
         model.addAttribute("payment", payment);

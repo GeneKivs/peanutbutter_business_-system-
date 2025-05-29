@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.peanutbutter.peanutbutter.model.Batch;
+import com.peanutbutter.peanutbutter.model.enums.BatchStatus;
 
 public interface BatchRepository extends JpaRepository<Batch,Integer>{
 
@@ -19,5 +20,7 @@ public interface BatchRepository extends JpaRepository<Batch,Integer>{
             ORDER BY b.received_date ASC
             """, nativeQuery = true)
     List<Batch > findAvailableBatchesByProductID(@Param("productID")int productID);
+
+    List<Batch> findByBatchStatus(BatchStatus batchStatus);
 
 }

@@ -18,6 +18,10 @@ public class PaymentService {
         paymentRepository.save(payment);
     }
 
+    public Payment getPaymentByID(int paymentID){
+        return paymentRepository.findById(paymentID).orElse(null);
+    }
+
     public List<Payment> getAllPaymentTypes(){
         return paymentRepository.findAll();
     }

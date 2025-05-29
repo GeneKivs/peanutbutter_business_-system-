@@ -85,6 +85,10 @@ public class BatchService {
         batchRepository.save(batch);
     }
 
+    public List<Batch> getAvailableBatches(){
+        return batchRepository.findByBatchStatus(BatchStatus.AVAILABLE);
+    }
+
     public Batch getBatchByID(int batchID){
         return batchRepository.findById(batchID).orElse(null);
     }

@@ -4,135 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peanut Butter Business Dashboard</title>
-    <style>
-      /* Reset some default styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Body styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f1e1; /* Cream background */
-    color: #3e2723; /* Brown text */
-}
-
-/* Header Section */
-header {
-    background-color: #6f4f1f; /* Brown background */
-    color: #f5f1e1; /* Cream text */
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 30px;
-    align-items: center;
-}
-
-header .logo h1 {
-    font-size: 1.8em;
-}
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-}
-
-nav ul li {
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: #f5f1e1; /* Cream color for links */
-    text-decoration: none;
-    font-size: 1.1em;
-}
-
-nav ul li a:hover {
-    color: #c2a77e; /* Light brown for hover effect */
-}
-
-/* Main Dashboard */
-.dashboard {
-    padding: 30px;
-}
-
-.card-container {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-.card {
-    background-color: #f5f1e1; /* Cream background for cards */
-    color: #3e2723; /* Brown text */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    text-align: center;
-}
-
-.card h2 {
-    margin-bottom: 15px;
-    font-size: 1.5em;
-}
-
-.card p {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-}
-
-/* Specific card colors */
-.card.stock {
-    background-color: #6f4f1f; /* Brown background for stock */
-    color: #f5f1e1; /* Cream text */
-}
-
-.card.sales {
-    background-color: #a67c52; /* Light brown background for sales */
-    color: #f5f1e1; /* Cream text */
-}
-
-.card.profit {
-    background-color: #3e2723; /* Dark brown background for profit */
-    color: #f5f1e1; /* Cream text */
-}
-
-.card.reorder {
-    background-color: #d7ccc8; /* Light beige for reorder */
-    color: #3e2723; /* Brown text */
-}
-
-/* Footer (Bottom Navigation) */
-footer {
-    background-color: #6f4f1f; /* Brown background */
-    color: #f5f1e1; /* Cream text */
-    padding: 15px 0;
-    text-align: center;
-}
-
-footer ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-}
-
-footer ul li {
-    margin: 0 20px;
-}
-
-footer ul li a {
-    color: #f5f1e1;
-    text-decoration: none;
-    font-size: 1.2em;
-}
-
-footer ul li a:hover {
-    color: #c2a77e;
-}
-
-    </style>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -141,59 +13,45 @@ footer ul li a:hover {
         <div class="logo">
             <h1>Peanut Butter System</h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Capital</a></li>
-                <li><a href="#">locations</a></li>
-                <li><a href="#">Sales</a></li>
-                <li><a href="#">Inventory</a></li>
-                <li><a href="#">Reports</a></li>
-            </ul>
-        </nav>
+        
     </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+           
+        </ul>
+    </div>
 
     <!-- Main Dashboard -->
-    <main class="dashboard">
+    <div class="content">
         <div class="card-container">
-            <!-- Total Stock Card -->
-            <div class="card stock">
-                <h2>Total Stock</h2>
-                <p>800g: 150 units</p>
-                <p>400g: 200 units</p>
+            <!-- Link to Customer dashboard -->
+            <div class="card customer">
+            <a href="">Customers</a>
             </div>
 
-            <!-- Sales Summary Card -->
+            <!-- Link to Sales Dashboard-->
             <div class="card sales">
-                <h2>Sales Summary</h2>
-                <p>Total Sales: $2,500</p>
-                <p>Sales Today: $350</p>
+                <a href="">Sales</a>
             </div>
 
-            <!-- Profit Overview Card -->
-            <div class="card profit">
-                <h2>Profit Status</h2>
-                <p>Total Profit: $1,200</p>
-                <p>Capital Used: $1,300</p>
+            <!-- Link to InventoryDashboard -->
+            <div class="card inventory">
+                <a href="">Invantory</a>
             </div>
 
-            <!-- Reorder Alerts Card -->
-            <div class="card reorder">
-                <h2>Reorder Alerts</h2>
-                <p>800g: 20 units remaining</p>
-                <p>400g: 50 units remaining</p>
+            <!-- Link to Reports -->
+            <div class="card reports">
+                <a href="">Reports</a>
             </div>
         </div>
-    </main>
+    </div>
 
-    <!-- Bottom Navigation -->
-    <footer>
-        <ul>
-            <li><a href="#">Sales Entry</a></li>
-            <li><a href="#">Inventory Management</a></li>
-            <li><a href="#">Customer Data</a></li>
-        </ul>
-    </footer>
+    
 
 </body>
 </html>

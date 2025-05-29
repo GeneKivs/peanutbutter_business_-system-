@@ -3,33 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Peanut Butter System - unit Definition Form</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            height: 100vh;
-            background-color: #f5f1e1;
-        }
-
-        
-
-       
-    </style>
+    
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-
-    <div class="sidebar">
-        <h2>PB Manager</h2>
-        <a href="#">Dashboard</a>
-        <a href="#">Capital</a>
-        <a href="#">Production</a>
-        <a href="#">Stock</a>
-        <a href="#">Sales</a>
-        <a href="#">Customers</a>
-        <a href="#">Reports</a>
-        <a href="#">Settings</a>
+<!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+            
+        </ul>
     </div>
 
     <div class="main-content">

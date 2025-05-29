@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 import com.peanutbutter.peanutbutter.model.Batch;
 import com.peanutbutter.peanutbutter.model.Expence;
 import com.peanutbutter.peanutbutter.model.Expenditure;
+import com.peanutbutter.peanutbutter.repository.BatchRepository;
 import com.peanutbutter.peanutbutter.repository.ExpenditureRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class ExpenditureService {
+
+    @Autowired
+    private BatchRepository batchRepository;
 
     @Autowired
     private BatchService batchService;
@@ -45,6 +49,17 @@ public class ExpenditureService {
                     expenditure.setExpenditureDate(LocalDate.now());
                     
                     expenditureRepository.save(expenditure);
+
+                    //Add the expenditure to the totat expenditure in the batch table
+                    Batch batchexpend = expenditure.getBatch();
+
+                    BigDecimal getBatchExpenditure = batchexpend.getTotalExpenditure();
+                    BigDecimal totalExpence = getBatchExpenditure.add(expenditure.getAmountSpent());
+
+                    batchexpend.setTotalExpenditure(totalExpence);
+                    batchRepository.save(batchexpend);
+
+
                 }
             }
         }
