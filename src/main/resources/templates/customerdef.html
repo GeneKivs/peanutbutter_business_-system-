@@ -45,7 +45,7 @@
                         <option th:each="location : ${locations}" th:value="${location.locationID}" th:text="${location.locationName}"></option>
                     </select>
                 <label for="phoneNumber">Contact Number</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" required pattern="[0-9]{10}">
+                <input type="tel" id="phoneNumber" name="phoneNumber"  pattern="[0-9]{10}">
 
                 <button type="submit">Save Customer</button>
             </form>

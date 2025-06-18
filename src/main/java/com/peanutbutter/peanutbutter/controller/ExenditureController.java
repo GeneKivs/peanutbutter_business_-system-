@@ -50,10 +50,13 @@ public class ExenditureController {
     }
 
     @PostMapping("/saveExpenditure")
-    public String saveExpenditure( @RequestParam("batchID")Integer batchID,
-                                    @RequestParam(value = "expenceIDs")List<Integer> expenceIDs,
-                                    HttpServletRequest request, RedirectAttributes redirectAttributes){
-        expenditureService.definexpenditure(batchID, expenceIDs, request);
+    public String saveExpenditure(
+            @RequestParam("batchID") Integer batchID,
+            @RequestParam(value = "expenceIDs") List<Integer> expenceIDs,
+            @RequestParam(value = "expenditureDate", required = false) String expenditureDate,
+            HttpServletRequest request,
+            RedirectAttributes redirectAttributes) {
+        expenditureService.definexpenditure(batchID, expenceIDs, expenditureDate, request);
         return "redirect:/expenditures";
     }
 

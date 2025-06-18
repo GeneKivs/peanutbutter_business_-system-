@@ -33,6 +33,12 @@
         <div class="form-container">
             <h2>Receive Peanutbutter</h2>
             <form th:action="@{/saveBatch}" method="post">
+                <input type="date"
+                       id="transactionDate"
+                       name="transactionDate"
+                       th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       required>
                 <label for="peanutQuantity">peanut Quantity(Kg) </label>
                 <input type="number" id="peanutQuantity" name="peanutQuantity" required>
 

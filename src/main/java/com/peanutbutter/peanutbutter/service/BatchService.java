@@ -3,6 +3,7 @@ package com.peanutbutter.peanutbutter.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,22 @@ public class BatchService {
     @Autowired
     private BatchRepository batchRepository;
 
-    public void defineBatch(int peanutQuantity,BigDecimal amountPaid,String[] productIds, HttpServletRequest request){
+    public void defineBatch(int peanutQuantity, BigDecimal amountPaid, String[] productIds, HttpServletRequest request) {
         //create new batch
         Batch batch = new Batch();
         batch.setPeanutQuantity(peanutQuantity);
         batch.setAmountPaid(amountPaid);
-        batch.setReceivedDate(LocalDate.now());        
-        batchRepository.save(batch);//save first t generate an ID
+
+        // Get the transaction date from the form and set it as receivedDate
+        String transactionDateStr = request.getParameter("transactionDate");
+        if (transactionDateStr != null && !transactionDateStr.isEmpty()) {
+            LocalDate transactionDate = LocalDate.parse(transactionDateStr, DateTimeFormatter.ISO_DATE);
+            batch.setReceivedDate(transactionDate);
+        } else {
+            batch.setReceivedDate(LocalDate.now());
+        }
+
+        batchRepository.save(batch); //save first to generate an ID
 
         int totalTins = 0;
 

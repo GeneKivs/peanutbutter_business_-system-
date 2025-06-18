@@ -32,7 +32,7 @@ public class LocationController {
         System.out.println(location);
         locationService.defineLocation(location);
         redirectAttributes.addFlashAttribute("successmessage","location added succesfully ");
-        return "redirect:/locationdef";
+        return "redirect:/locations";
     }
 
     @GetMapping("/locations")

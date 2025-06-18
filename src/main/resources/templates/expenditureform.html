@@ -30,6 +30,14 @@
         <div class="form-container">
             <h2>Create Expenditure</h2>
             <form th:action="@{/saveExpenditure}" method="post">
+                <label for="expenditureDate">Expenditure Date:</label>
+                <input type="date"
+                       id="expenditureDate"
+                       name="expenditureDate"
+                       th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       required>
+                <br><br>
                 <label for="batchID">  Batch :</label>
                 <select name="batchID" required>
                     <option value="">Select batch</option>

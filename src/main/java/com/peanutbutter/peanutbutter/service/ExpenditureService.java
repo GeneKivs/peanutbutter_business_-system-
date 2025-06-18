@@ -2,6 +2,7 @@ package com.peanutbutter.peanutbutter.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,14 +31,20 @@ public class ExpenditureService {
     @Autowired
     private ExpenditureRepository expenditureRepository;
 
-    public void definexpenditure(int batchID, List<Integer> expenceIDs, HttpServletRequest request){
-        if(expenceIDs != null){
+    public void definexpenditure(int batchID, List<Integer> expenceIDs, String expenditureDate, HttpServletRequest request) {
+        if (expenceIDs != null) {
             Batch batch = batchService.getBatchByID(batchID);
-            for(int expenceID : expenceIDs){
-                String  paramName = "amount_" + expenceID;
+            LocalDate expDate;
+            if (expenditureDate != null && !expenditureDate.isEmpty()) {
+                expDate = LocalDate.parse(expenditureDate, DateTimeFormatter.ISO_DATE);
+            } else {
+                expDate = LocalDate.now();
+            }
+            for (int expenceID : expenceIDs) {
+                String paramName = "amount_" + expenceID;
                 String amountStr = request.getParameter(paramName);
 
-                if(amountStr !=null && !amountStr.isEmpty()){
+                if (amountStr != null && !amountStr.isEmpty()) {
                     BigDecimal amountSpent = new BigDecimal(amountStr);
 
                     Expence expence = expenceService.getExpenceByID(expenceID);
@@ -46,11 +53,11 @@ public class ExpenditureService {
                     expenditure.setBatch(batch);
                     expenditure.setExpence(expence);
                     expenditure.setAmountSpent(amountSpent);
-                    expenditure.setExpenditureDate(LocalDate.now());
-                    
+                    expenditure.setExpenditureDate(expDate);
+
                     expenditureRepository.save(expenditure);
 
-                    //Add the expenditure to the totat expenditure in the batch table
+                    // Add the expenditure to the total expenditure in the batch table
                     Batch batchexpend = expenditure.getBatch();
 
                     BigDecimal getBatchExpenditure = batchexpend.getTotalExpenditure();
@@ -58,23 +65,20 @@ public class ExpenditureService {
 
                     batchexpend.setTotalExpenditure(totalExpence);
                     batchRepository.save(batchexpend);
-
-
                 }
             }
         }
-        
     }
 
-    public List<Expenditure> getAllExpenditures(){
+    public List<Expenditure> getAllExpenditures() {
         return expenditureRepository.findAll();
     }
 
-    public List<Expenditure>  getExpendituresbybatchID(int batchID){
+    public List<Expenditure> getExpendituresbybatchID(int batchID) {
         return expenditureRepository.findByBatchID(batchID);
     }
 
-    public void updateExpenditure(Expenditure expenditure){
+    public void updateExpenditure(Expenditure expenditure) {
         expenditureRepository.save(expenditure);
     }
 
