@@ -50,23 +50,7 @@
         
         <div class="form-container">
             <h2>Expenditures</h2>
-            <form th:action="@{/expenditures}" method="get">
-               <label for="batchID">Filter by Batch:</label>
-    <select name="batchID" id="batchID">
-        <option value="">-- All Batches --</option>
-        <th:block th:each="batch : ${batches}">
-            <option th:value="${batch.batchID}" 
-                    th:text=" 'batch # ' + ${batch.batchID} + 'date: ' + ${batch.receivedDate}"
-                    th:selected="${batch.batchID == selectedBatchID}"></option>
-        </th:block>
-    </select>
-        
-
-
-                <button type="submit">Filter</button>
-                
-
-            </form>
+            
         </div>
         <div class="tab-buttons">
             <button ><a th:href="@{/expendituredef}">Add expenditure</a></button>
@@ -78,7 +62,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th>batch ID</th>
+                        
                         <th>expence type</th>
                         <th> Amount Spent</th>                        
                         <th> date</th>
@@ -87,7 +71,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="expenditure : ${expenditures}">
-                        <td th:text="${expenditure.batch.batchID}"></td>
+        
                         <td th:text="${expenditure.expence.expenceName}"></td>
                         <td th:text="${expenditure.amountSpent}"></td>
                         <td th:text="${expenditure.expenditureDate}"></td>

@@ -17,9 +17,7 @@ public class Expenditure {
     @JoinColumn(name = "expenceID")
     private Expence expence;
 
-    @ManyToOne
-    @JoinColumn(name = "batchID")
-    private Batch batch;
+    
     private LocalDate expenditureDate;
 
     @Column(precision = 10, scale = 2)
@@ -41,13 +39,7 @@ public class Expenditure {
         this.expence = expence;
     }
 
-    public Batch getBatch(){
-        return batch;
-    }
-
-    public void setBatch(Batch batch){
-        this.batch = batch;
-    }
+    
     public LocalDate getExpenditureDate(){
         return expenditureDate;
     }

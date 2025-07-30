@@ -8,10 +8,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.peanutbutter.peanutbutter.model.Batch;
+
 import com.peanutbutter.peanutbutter.model.Expence;
 import com.peanutbutter.peanutbutter.model.Expenditure;
-import com.peanutbutter.peanutbutter.repository.BatchRepository;
+
 import com.peanutbutter.peanutbutter.repository.ExpenditureRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,11 +19,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @Service
 public class ExpenditureService {
 
-    @Autowired
-    private BatchRepository batchRepository;
+    
 
-    @Autowired
-    private BatchService batchService;
 
     @Autowired
     private ExpenceService expenceService;
@@ -31,9 +28,12 @@ public class ExpenditureService {
     @Autowired
     private ExpenditureRepository expenditureRepository;
 
-    public void definexpenditure(int batchID, List<Integer> expenceIDs, String expenditureDate, HttpServletRequest request) {
+    @Autowired
+    private AccountService accountService;
+
+    public void definexpenditure( List<Integer> expenceIDs,String expenditureDate, String paymentAccount, HttpServletRequest request) {
         if (expenceIDs != null) {
-            Batch batch = batchService.getBatchByID(batchID);
+            
             LocalDate expDate;
             if (expenditureDate != null && !expenditureDate.isEmpty()) {
                 expDate = LocalDate.parse(expenditureDate, DateTimeFormatter.ISO_DATE);
@@ -50,21 +50,18 @@ public class ExpenditureService {
                     Expence expence = expenceService.getExpenceByID(expenceID);
 
                     Expenditure expenditure = new Expenditure();
-                    expenditure.setBatch(batch);
+                    
                     expenditure.setExpence(expence);
                     expenditure.setAmountSpent(amountSpent);
                     expenditure.setExpenditureDate(expDate);
 
                     expenditureRepository.save(expenditure);
 
-                    // Add the expenditure to the total expenditure in the batch table
-                    Batch batchexpend = expenditure.getBatch();
+                    // Update the balance of the corresponding expense account
+                    accountService.addToExpenseAccountBalance(expence.getExpenceName(), amountSpent);
 
-                    BigDecimal getBatchExpenditure = batchexpend.getTotalExpenditure();
-                    BigDecimal totalExpence = getBatchExpenditure.add(expenditure.getAmountSpent());
-
-                    batchexpend.setTotalExpenditure(totalExpence);
-                    batchRepository.save(batchexpend);
+                    // Reduce the balance from the payment account
+                accountService.reduceAccountBalance(paymentAccount, amountSpent);
                 }
             }
         }

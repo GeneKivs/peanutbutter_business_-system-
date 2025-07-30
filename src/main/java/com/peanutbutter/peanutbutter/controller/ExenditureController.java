@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.peanutbutter.peanutbutter.model.Account;
 import com.peanutbutter.peanutbutter.model.Batch;
 import com.peanutbutter.peanutbutter.model.Expence;
 import com.peanutbutter.peanutbutter.model.Expenditure;
-
+import com.peanutbutter.peanutbutter.repository.AccountRepository;
 import com.peanutbutter.peanutbutter.service.BatchService;
 import com.peanutbutter.peanutbutter.service.ExpenceService;
 import com.peanutbutter.peanutbutter.service.ExpenditureService;
@@ -30,6 +31,9 @@ public class ExenditureController {
     private BatchService batchService;
 
     @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
     private ExpenceService expenceService;
 
     @GetMapping("/expendituredef")
@@ -40,6 +44,9 @@ public class ExenditureController {
         List<Batch> batches = batchService.getAvailableBatches();
         
          model.addAttribute("batches", batches);
+
+         List<Account> accounts = accountRepository.findAllaccounts();
+         model.addAttribute("accounts", accounts);
             
         
        
@@ -51,30 +58,21 @@ public class ExenditureController {
 
     @PostMapping("/saveExpenditure")
     public String saveExpenditure(
-            @RequestParam("batchID") Integer batchID,
+            
             @RequestParam(value = "expenceIDs") List<Integer> expenceIDs,
             @RequestParam(value = "expenditureDate", required = false) String expenditureDate,
+            @RequestParam("paymentAccount") String paymentAccount,
             HttpServletRequest request,
             RedirectAttributes redirectAttributes) {
-        expenditureService.definexpenditure(batchID, expenceIDs, expenditureDate, request);
+        expenditureService.definexpenditure(expenceIDs, expenditureDate, paymentAccount, request);;
         return "redirect:/expenditures";
     }
 
     @GetMapping("/expenditures")
-    public String showExpenditureList(Model model,@RequestParam(value = "batchID" , required = false)Integer batchID){
-        List<Batch> batches = batchService.getAllBatches();
-        model.addAttribute("batches", batches);
-
-        List<Expenditure> expenditures ;
-        if(batchID != null){
-            expenditures = expenditureService.getExpendituresbybatchID(batchID);
-            model.addAttribute("selectedBatchID", batchID);
-
-        }else{
-            expenditures = expenditureService.getAllExpenditures();
-        }
+    public String showExpenditureList(Model model){
+        List<Expenditure> expenditures = expenditureService.getAllExpenditures();
         model.addAttribute("expenditures", expenditures);
-        
+       
         return "expenditurelist";
     }
 

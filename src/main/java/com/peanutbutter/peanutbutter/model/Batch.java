@@ -28,9 +28,7 @@ public class Batch {
     private BatchStatus batchStatus;
     @Column(precision = 10, scale = 2)
     private BigDecimal profit;
-    @Column(precision = 10, scale = 2)
-    private BigDecimal totalExpenditure;
-    
+   
     private LocalDate endDate;
 
      public BatchStatus getBatchStatus() {
@@ -40,12 +38,7 @@ public class Batch {
     this.batchStatus = batchStatus;
    }
 
-    public BigDecimal getTotalExpenditure() {
-        return totalExpenditure;
-    }
-    public void setTotalExpenditure(BigDecimal totalExpenditure) {
-        this.totalExpenditure = totalExpenditure;
-    }
+    
 
     public LocalDate getEndDate() {
         return endDate; 

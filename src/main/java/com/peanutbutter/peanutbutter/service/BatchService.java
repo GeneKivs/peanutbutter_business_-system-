@@ -87,7 +87,7 @@ public class BatchService {
         //update the batch profit, revenue and total expenditure
         batch.setProfit(BigDecimal.ZERO);
         batch.setRevenue(BigDecimal.ZERO);
-        batch.setTotalExpenditure(BigDecimal.ZERO);
+        
 
         //update the batch status to available
         batch.setBatchStatus(BatchStatus.AVAILABLE);
