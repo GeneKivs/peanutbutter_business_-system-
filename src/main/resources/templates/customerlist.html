@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <title>Peanut Butter System - Customer Form</title>
     <style>
+       html, body {
+            height: 100%;
+        }
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            height: 100vh;
-            background-color: #f5f1e1;
+            overflow: hidden;
+        }
+        .main-content {
+            overflow-y: auto;
+            height: calc(100vh - 60px);
         }
 
         
@@ -39,18 +42,24 @@
     </script>
 </head>
 <body>
+     <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
 
-    <div class="sidebar">
-        <h2>PB Manager</h2>
-        <a href="#">Dashboard</a>
-        <a href="#">Capital</a>
-        <a href="#">Locations</a>
-        <a href="#">Production</a>
-        <a href="#">Stock</a>
-        <a href="#">Sales</a>
-        <a href="#">Customers</a>
-        <a href="#">Reports</a>
-        <a href="#">Settings</a>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+            
+        </ul>
     </div>
 
     <div class="main-content">

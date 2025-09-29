@@ -9,6 +9,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int paymentID;
+    
     private String paymentType;
 
     public int getPaymentID(){

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import jakarta.persistence.*;
 
+//links batch to a product
+
 @Entity
 @Table(name = "batch_product")
 public class BatchProduct {

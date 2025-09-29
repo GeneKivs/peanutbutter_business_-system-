@@ -15,7 +15,7 @@ public class Expenditure {
 
     @ManyToOne
     @JoinColumn(name = "expenceID")
-    private Expence expence;
+    private Expense expense;
 
     
     private LocalDate expenditureDate;
@@ -31,12 +31,12 @@ public class Expenditure {
         this.expenditureID = expenditureID;
     }
 
-    public Expence getExpence (){
-        return expence;
+    public Expense getExpense (){
+        return expense;
     }
 
-    public void setExpence(Expence expence){
-        this.expence = expence;
+    public void setExpense(Expense expense){
+        this.expense = expense;
     }
 
     

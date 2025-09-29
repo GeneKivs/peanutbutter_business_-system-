@@ -8,8 +8,11 @@ public class Unit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int unitID;
+    
     private String unitName;
+
     private String unitAbbriviation;
+    
     private String description;
 
     public int  getUnitID(){

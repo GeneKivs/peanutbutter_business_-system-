@@ -1,4 +1,4 @@
-   /* Reset some default styling */
+/* Reset some default styling */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +10,13 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f1e1; /* Cream background */
     color: #3e2723; /* Brown text */
-    
+    /* Remove overflow hidden to allow scrolling */
+    overflow: auto;
+    height: 100vh;
+}
+
+html {
+    height: 100%;
 }
 
 /* Header Section */
@@ -22,9 +28,12 @@ header {
     padding: 15px 30px;
     align-items: center;
     z-index: 1000;
-    width: 100%;
+    width: 100vw;
     top: 0;
     left: 0;
+    position: fixed;
+    height: 60px;
+    box-sizing: border-box;
 }
 
 header .logo h1 {
@@ -130,6 +139,10 @@ header .logo h1 {
     margin-left: 220px;
     padding: 20px;
     background-color: #f5f1e1;
+    margin-top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    box-sizing: border-box;
 }
 
 .form-container {
@@ -197,11 +210,18 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #a67c52;
 }
+
+button.action-Button{
+    background-color: #a67c52;
+    color: #f5f1e1;
+    cursor: pointer;
+    font-weight: bold;
+}
 /* Sidebar */
 /* Sidebar Styling */
 .sidebar {
     width: 220px;
-    height: 100vh;
+    height: calc(100vh - 60px);
     background-color: #6f4f1f; /* Brown sidebar */
     color: #f5f1e1; /* Cream text */
     padding-top: 20px;
@@ -209,6 +229,7 @@ button[type="submit"]:hover {
     left: 0;
     top: 60px;
     z-index: 999;
+    overflow-y: auto;
 }
 
 .sidebar-title {

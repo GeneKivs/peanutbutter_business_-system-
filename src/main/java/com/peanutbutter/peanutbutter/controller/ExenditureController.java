@@ -12,11 +12,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.peanutbutter.peanutbutter.model.Account;
 import com.peanutbutter.peanutbutter.model.Batch;
-import com.peanutbutter.peanutbutter.model.Expence;
+import com.peanutbutter.peanutbutter.model.Expense;
 import com.peanutbutter.peanutbutter.model.Expenditure;
 import com.peanutbutter.peanutbutter.repository.AccountRepository;
 import com.peanutbutter.peanutbutter.service.BatchService;
-import com.peanutbutter.peanutbutter.service.ExpenceService;
+import com.peanutbutter.peanutbutter.service.ExpenseService;
 import com.peanutbutter.peanutbutter.service.ExpenditureService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +34,7 @@ public class ExenditureController {
     private AccountRepository accountRepository;
 
     @Autowired
-    private ExpenceService expenceService;
+    private ExpenseService expenseService;
 
     @GetMapping("/expendituredef")
     public String showExpenditureForm(Model model){
@@ -45,14 +45,14 @@ public class ExenditureController {
         
          model.addAttribute("batches", batches);
 
-         List<Account> accounts = accountRepository.findAllaccounts();
+         List<Account> accounts = accountRepository.findAllBankaccounts();
          model.addAttribute("accounts", accounts);
             
         
        
 
-        List<Expence> expences = expenceService.getALlExpences();
-        model.addAttribute("expences", expences);
+        List<Expense> expenses = expenseService.getALlExpenses();
+        model.addAttribute("expenses", expenses);
         return "expenditureform";
     }
 

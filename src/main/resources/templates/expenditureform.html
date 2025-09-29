@@ -22,6 +22,7 @@
             <li><a th:href="@{/inventory}" >inventory</a></li>
             <li><a th:href="@{/salesDashboard}" >Sales</a></li>
             <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
            
         </ul>
     </div>
@@ -42,11 +43,11 @@
 
 
                  <!-- List of expences with checkboxes and input for amount -->
-    <div th:each="expence : ${expences}">
-        <input type="checkbox" name="expenceIDs" th:value="${expence.expenceID}" />
-        <span th:text="${expence.expenceName}"></span>
+    <div th:each="expense : ${expenses}">
+        <input type="checkbox" name="expenseIDs" th:value="${expense.expenseID}" />
+        <span th:text="${expense.expenseName}"></span>
         <input type="number" step="0.01" min="0" 
-               th:name="'amount_' + ${expence.expenceID}" 
+               th:name="'amount_' + ${expense.expenseID}" 
                placeholder="Amount Spent" />
     </div>
 

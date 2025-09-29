@@ -14,11 +14,16 @@ public class Batch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int batchID;
+
     private LocalDate receivedDate;
+
     private int totalTins;
+
     private int peanutQuantity;
+
     @Column(precision = 10, scale = 2)
     private BigDecimal amountPaid;
+
     private int RemainingQuantity;
 
     @Column(precision = 10, scale = 2)
@@ -26,6 +31,7 @@ public class Batch {
     
    @Enumerated(EnumType.STRING)
     private BatchStatus batchStatus;
+    
     @Column(precision = 10, scale = 2)
     private BigDecimal profit;
    

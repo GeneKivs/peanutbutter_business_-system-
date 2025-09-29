@@ -22,6 +22,7 @@
             <li><a th:href="@{/inventory}" >inventory</a></li>
             <li><a th:href="@{/salesDashboard}" >Sales</a></li>
             <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
            
         </ul>
     </div>
@@ -29,18 +30,18 @@
     <div class="main-content">
         <div class="form-container">
             <h2>Expence Definition</h2>
-            <form th:action="@{/saveExpence}" method="post">
-                <label for="expenceName">Expence Name</label>
-                <input type="text" id="expenceName" name="expenceName" required>
+            <form th:action="@{/saveExpense}" method="post">
+                <label for="expenseName">Expense Name</label>
+                <input type="text" id="expenseName" name="expenseName" required>
 
                 
 
-                <label for="description" >Expence Description</label>
+                <label for="description" >Expense Description</label>
                 <textarea name="description" id="description" rows="3" ></textarea>
         
 
 
-                <button type="submit">Save expence type</button>
+                <button type="submit">Save expense type</button>
                 
 
             </form>
