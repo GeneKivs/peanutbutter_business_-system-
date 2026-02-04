@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Peanut Butter System - Expence Definition Form</title>
+    <title>Peanut Butter System - Expense Edit Form</title>
     
     <link rel="stylesheet" href="/style.css">
+
+    <script src="/Message.js"></script>
 </head>
 <body>
 
@@ -28,11 +30,21 @@
     </div>
 
     <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
         <div class="form-container">
-            <h2>Expence Definition</h2>
-            <form th:action="@{/saveExpense}" method="post">
+            <h2>Edit Expense</h2>
+            <form th:action="@{/updateExpense}"th:object="${expense}" method="post">
+                <input type="text" th:field="*{expenseID}" hidden>
                 <label for="expenseName">Expense Name</label>
-                <input type="text" id="expenseName" name="expenseName" required>
+                <input type="text" id="expenseName" th:field="*{expenseName}" required>
 
                 
 
@@ -41,7 +53,7 @@
         
 
 
-                <button type="submit">Save expense type</button>
+                <button type="submit">Edit expense type</button>
                 
 
             </form>

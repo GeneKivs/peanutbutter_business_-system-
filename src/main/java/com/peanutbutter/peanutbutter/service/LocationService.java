@@ -18,6 +18,10 @@ public class LocationService {
         locationRepository.save(location);
     }
 
+    public Location getLocationById(int locationID){
+        return locationRepository.findById(locationID).orElse(null);
+    }
+
     public List<Location> getAllLocations(){
         return locationRepository.findAll();
     }

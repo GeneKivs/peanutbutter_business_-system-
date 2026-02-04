@@ -5,6 +5,7 @@
     <title>Peanut Butter System - unit Definition Form</title>
     
     <link rel="stylesheet" href="/style.css">
+    <script src="/Message.js"></script>
 </head>
 <body>
 <!-- Header Section -->
@@ -27,10 +28,20 @@
     </div>
 
     <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
         <div class="form-container">
             <h2>unit Definition</h2>
             <form th:action="@{/saveUnit}" method="post">
                 <label for="unitName">unit Name</label>
+                <button>Exit</button>
                 <input type="text" id="unitName" name="unitName" required>
 
                 <label for="unitAbbriviation">unit unitAbbriviation</label>

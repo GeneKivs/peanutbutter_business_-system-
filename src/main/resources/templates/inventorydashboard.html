@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peanut Butter Inventory Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+   <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+            
+        </ul>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="content">
+        <div class="dashboard-cards">
+            <div class="card">
+                <h2>Total products</h2>
+            </div>
+            
+            <div class="card">
+            <a th:href="@{/unitdef}">define units of measurement</a>
+            </div>
+
+            
+            <div class="card">
+                <a th:href="@{/productdef}">add product</a>
+            </div>
+
+            <div class="card" >
+                <a th:href="@{/receiveBatch}">receive Peanut Butter</a>
+            </div>
+
+            <div class="card" >
+                <a th:href="@{/productdef}">view issued list</a>
+            </div>
+
+            
+        </div>
+        <div class="table-container">
+            <h3>products</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>product ID</th>
+                        <th>product Name</th>
+                        <th> quantity in stock</th>
+                        <th>unit</th>   
+                        <th>reorder level</th>                     
+                        <th> price per tin</th>
+                        <th>Actions</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product: ${products}">
+                        <td th:text="${product.productID}"></td>
+                        <td th:text="${product.productName}"></td>
+                        <td th:text="${product.quantityInStock}"></td>
+                        <td th:text="${product.unit.unitAbbriviation}"></td>
+                        <td th:text="${product.reorderLevel}"></td>
+                        <td th:text="${product.pricePerTin}"></td>
+                        <td><a th:href="@{/productEdit/{productID}(productID=${product.productID})}">
+                                <button class="edit">Edit</button>
+                            </a>
+                        
+
+                        
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

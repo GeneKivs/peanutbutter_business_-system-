@@ -64,6 +64,7 @@
                         <th>unit ID</th>
                         <th>unit Name</th>
                         <th>unit Abbriviation</th>
+                        <th>Actions</th>
                         
                     </tr>
                 </thead>
@@ -74,6 +75,10 @@
                         <td th:text="${unit.unitAbbriviation}"></td>
                         
                         
+                        <td><a th:href="@{/unitEdit/{unitID}(unitID=${unit.unitID})}">
+                                <button class="edit">Edit</button>
+                            </a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

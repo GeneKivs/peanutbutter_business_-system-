@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Product Edit Form</title>
+   
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="/Message.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+           
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
+        <div class="form-container">
+            <h2>Edit Product</h2>
+            <form th:action="@{/updateProduct}" th:object="${product}" method="post">
+
+                <input type="text" th:field="*{productID}" hidden>
+
+                <label for="productName">Product Name</label>
+                <input type="text" id="productName" th:field="*{productName}" required>
+
+                <label for="reorderLevel">reorder Level</label>
+                <input type="number" id="reorderLevel"  th:field="*{preorderLvel}" required>
+
+                <label for="productPrice">Product price</label>
+                <input type="number" id="pricePerTin" th:field="*{productPerTin}" required>
+
+                <label for="unitID">unit Name</label>
+                    <select name="unit.unitID" required>
+                        <option value="">Select unit</option>
+                        <option th:each="unit : ${units}" th:value="${unit.unitID}" th:text="${unit.unitAbbriviation}"></option>
+                    </select>
+                
+
+                <button type="submit">update Product</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

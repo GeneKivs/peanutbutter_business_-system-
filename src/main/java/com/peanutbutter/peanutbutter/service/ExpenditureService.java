@@ -71,6 +71,10 @@ public class ExpenditureService {
         return expenditureRepository.findAll();
     }
 
+    public Expenditure getExpenditureByID(long expenditureID) {
+        return expenditureRepository.findById(expenditureID).orElse(null);
+    }
+
     public List<Expenditure> getExpendituresbybatchID(int batchID) {
         return expenditureRepository.findByBatchID(batchID);
     }

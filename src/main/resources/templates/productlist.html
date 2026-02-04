@@ -78,6 +78,10 @@
                         <td th:text="${product.unit.unitAbbriviation}"></td>
                         <td th:text="${product.reorderLevel}"></td>
                         <td th:text="${product.pricePerTin}"></td>
+                        <td><a th:href="@{/productEdit/{productID}(productID=${product.productID})}">
+                                <button class="edit">Edit</button>
+                            </a>
+                        
 
                         
                         

@@ -14,7 +14,7 @@ public class Expenditure {
     private long expenditureID;
 
     @ManyToOne
-    @JoinColumn(name = "expenceID")
+    @JoinColumn(name = "expenseID")
     private Expense expense;
 
     

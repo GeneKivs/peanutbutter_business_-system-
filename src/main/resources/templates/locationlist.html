@@ -63,6 +63,7 @@
                     <tr>
                         <th>location ID</th>
                         <th>location Name</th>
+                        <th>Actions</th>
                         
                     </tr>
                 </thead>
@@ -70,6 +71,9 @@
                     <tr th:each="location : ${locations}">
                         <td th:text="${location.locationID}"></td>
                         <td th:text="${location.locationName}"></td>
+                        <td><a th:href="@{/locationEdit/{locationID}(locationID=${location.locationID})}">
+                                <button class="edit">Edit</button>
+                            </a>
                         
                         
                     </tr>

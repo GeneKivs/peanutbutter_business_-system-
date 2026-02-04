@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Account definition  Form</title>
+    <style>
+        
+
+    </style>
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="/Message.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+            
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
+        <div class="form-container">
+            <h2>Account Definition</h2>
+            <form th:action="@{/saveAccount}" method="post">
+                <label>Account Category:</label><br>
+<input type="checkbox" name="accountCategory" value="BANK"> Bank<br>
+<input type="checkbox" name="accountCategory" value="EXPENSE"> Expense<br>
+<input type="checkbox" name="accountCategory" value="CUSTOMER"> Customer<br>
+<input type="checkbox" name="accountCategory" value="SUPPLIER"> Supplier<br>
+<input type="checkbox" name="accountCategory" value="REVENUE"> Revenue<br>
+<!-- Add more as needed -->
+<br>
+                <label for="accountName">Account Name</label>
+                <input type="text" id="accountName" name="accountName" >
+<!-- Customer dropdown (hidden by default) -->
+    <div id="customerSelectDiv" style="display:none;">
+        <label for="customerSelect">Select Customer</label>
+        <select id="customerSelect" name="customerName">
+            <option value="">--Select Customer--</option>
+            <option th:each="customer : ${customers}" th:value="${customer.customerName}" th:text="${customer.customerName}"></option>
+        </select>
+    </div>
+
+    <!-- Expense dropdown (hidden by default) -->
+    <div id="expenseSelectDiv" style="display:none;">
+        <label for="expenseSelect">Select Expense</label>
+        <select id="expenseSelect" name="expenseName">
+            <option value="">--Select Expense--</option>
+            <option th:each="expense : ${expenses}" th:value="${expense.expenseName}" th:text="${expense.expenseName}"></option>
+        </select>
+    </div>
+              
+
+                <label for="accountType">Account Type</label>
+        <select name="accountType" required>
+            <option value="ASSET">Asset</option>
+            <option value="LIABILITY">Liability</option>
+            <option value="EQUITY">Equity</option>
+            <option value="EXPENSE">Expense</option>
+            <option value="REVENUE">Revenue</option>
+        </select>
+                <button type="submit">Save </button>
+            </form>
+            <script>
+
+
+function toggleAccountCategoryFields() {
+    // Get all category checkboxes
+    var categories = document.getElementsByName('accountCategory');
+    var showCustomer = false;
+    var showExpense = false;
+
+    for (var i = 0; i < categories.length; i++) {
+        if (categories[i].checked && categories[i].value === 'CUSTOMER') {
+            showCustomer = true;
+        }
+        if (categories[i].checked && categories[i].value === 'EXPENSE') {
+            showExpense = true;
+        }
+    }
+
+    document.getElementById('customerSelectDiv').style.display = showCustomer ? '' : 'none';
+    document.getElementById('expenseSelectDiv').style.display = showExpense ? '' : 'none';
+}
+
+// Attach event listeners to checkboxes
+window.onload = function() {
+    var categories = document.getElementsByName('accountCategory');
+    for (var i = 0; i < categories.length; i++) {
+        categories[i].addEventListener('change', toggleAccountCategoryFields);
+    }
+    // Initial call in case of pre-checked boxes
+    toggleAccountCategoryFields();
+};
+</script>
+        </div>
+    </div>
+
+</body>
+</html>

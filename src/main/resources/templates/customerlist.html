@@ -90,7 +90,10 @@
                         <td th:text="${customer.location.locationName}"></td>
                         <td th:text="${customer.phoneNumber}"></td>
 
-                        
+                        <td><a th:href="@{/customerEdit/{customerID}(customerID=${customer.customerID})}">
+                                <button class="edit">Edit</button>
+                            </a>
+                        </td>
                         
                     </tr>
                 </tbody>

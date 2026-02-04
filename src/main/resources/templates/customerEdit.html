@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Customer Edit  Form</title>
+    <style>
+        
+
+    </style>
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="/Message.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+            
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
+        <div class="form-container">
+            <h2>Edit Customer</h2>
+            <form th:action="@{/updateCustomer}" th:object="${customer}" method="post">
+                <input type="hidden" th:field="*{customerID}"/>
+
+                <label for="firstrName">First Name</label>
+                <input type="text" id="firtName" th:field="*{firstName}" required>
+
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" th:field="*{lastName}" required>
+
+                <label for="locationID">location Name</label>
+                    <select name="location.locationID" required>
+                        <option value="">Select location</option>
+                        <option th:each="location : ${locations}" th:value="${location.locationID}" th:text="${location.locationName}"></option>
+                    </select>
+                <label for="phoneNumber">Contact Number</label>
+                <input type="tel" id="phoneNumber" th:field="*{phoneNumber}"  pattern="[0-9]{10}">
+
+                <button type="submit">Edit Customer</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

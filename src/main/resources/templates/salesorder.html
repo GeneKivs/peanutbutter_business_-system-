@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Sales Order Form</title>
+   
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        // Function to autofill the location field based on the selected customer
+    function autofillLocation() {
+            const customerSelect = document.getElementById("customerID");
+            const locationField = document.getElementById("location");
+            const selectedOption = customerSelect.options[customerSelect.selectedIndex];
+            locationField.value = selectedOption.getAttribute("data-location");
+        }
+    </script>
+    <script src="/Message.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+          
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
+        <div class="form-container">
+            <h2>Create sales order</h2>
+            <form th:action="@{/saveSalesOrder}" method="post">
+                <!-- Sales Order Date -->
+                <label for="salesOrderDate">Sales Order Date:</label>
+                <input type="date"
+                       id="salesOrderDate"
+                       name="salesOrderDate"
+                       th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       required>
+                <br><br>
+                <!-- Customer selection -->
+                <label for="customerID">Customer:</label>
+                <select name="customerID" id="customerID" onchange="autofillLocation()" required>
+                    <option value="">--Select Customer--</option>
+                    <th:block th:each="customer : ${customers}">
+                        <option th:value="${customer.customerID}"
+                                th:text="${customer.customerName}"
+                                th:attr="data-location=${customer.location.locationName}">
+                        </option>
+                    </th:block>
+                </select><br><br>
+
+                <!-- Location (auto-filled) -->
+                <label>Location:</label>
+                <input type="text" id="location" readonly><br><br>
+
+                 <!-- Products -->
+        <label>Products:</label><br>
+        <div th:each="product : ${products}">
+    <input type="checkbox"
+           th:name="product"
+           th:value="${product.productID}"
+           th:id="'product_' + ${product.productID}" />
+
+    <label th:for="'product_' + ${product.productID}" th:text="${product.productName}"></label>
+
+    <input type="number"
+           min="0"
+           th:name="'quantity_' + ${product.productID}"
+           placeholder="Quantity"
+           style="margin-left: 10px;" />
+    <br>
+</div>
+ 
+                <button type="submit">Save Sales Order</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    $('#customerID').select2({
+      placeholder: "--Select Customer--",
+      width: '100%'
+    });
+  });
+</script>
+
+</body>
+</html>

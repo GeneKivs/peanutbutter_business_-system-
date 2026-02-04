@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - price definition Form</title>
+   
+    <link rel="stylesheet" href="/style.css">
+    <script src="/Message.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+            
+        </ul>
+    </div>
+    <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
+        <div class="form-container">
+            <h2>Price Definition</h2>
+            <form th:action="@{/saveProductPrice}" method="post">
+                
+                <label for="productID">Product Name</label>
+                    <select name="productID" required>
+                        <option value="">Select product</option>
+                        <option th:each="product : ${products}" th:value="${product.productID}" th:text="${product.productName}"></option>
+                    </select>
+
+                <label for="pricePerTin">Set Price</label>
+                <input type="number" id="pricePerTin" name="pricePerTin" required>
+
+                <button type="submit">Save Price</button>
+                
+
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

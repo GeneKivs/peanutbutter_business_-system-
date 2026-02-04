@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Sales delivery Form</title>
+  
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        // Function to autofill the location field based on the selected customer
+    function updateSalesDetails(){
+            const salesSelect = document.getElementById("salesid");
+        const selectedOption = salesSelect.options[salesSelect.selectedIndex];
+
+        
+            
+            const amountToPay = document.getElementById("amountToPay");
+            
+            amountToPay.value = selectedOption.getAttribute("data-totalAmount");
+        }
+    </script>
+    <script src="/Message.js"></script>
+</head>
+<body>
+
+   <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+            
+        </ul>
+    </div>
+    <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
+        <div class="form-container">
+            <h2>Complete delivery</h2>
+            <form th:action="@{/saveSaleDelivery}" method="post">
+               <!-- Customer selection -->
+       <!-- Sales Order Dropdown -->
+    <label for="salesid">Sales Order:</label>
+    <select name="salesid" id="salesid" required onchange="updateSalesDetails()">
+        <option disabled selected>Select a Sales Order</option>
+        <option th:each="sales : ${salesList}" 
+                th:value="${sales.salesid}" 
+                
+                th:attr="data-totalAmount=${sales.totalAmount}"
+                th:text="'Sales #' + ${sales.salesid} + ' - ' + ${sales.customer.customerName}">
+        </option>
+    </select>
+    <br>
+
+    <!-- Amount to be Paid (Autofilled) -->
+    <label for="amountToPay">Amount to be Paid:</label>
+    <input type="text" id="amountToPay" readonly><br>
+
+    <!-- Amount Paid -->
+    <label for="amountPaid">Amount Paid:</label>
+    <input type="number" name="amountPaid" step="0.01" value="0"><br>
+
+    <!-- Delivery Cost -->
+    <label for="deliveryCost">Delivery Cost:</label>
+    <input type="number" name="deliveryCost" step="0.01" ><br>
+
+    <!-- Payment Type -->
+    <label for="paymentID">Payment Type:</label>
+    <select name="paymentID" required>
+        <option disabled selected>Select a Payment Type</option>
+        <option th:each="payment : ${payments}" 
+                th:value="${payment.paymentID}" 
+                th:text="${payment.paymentType}"></option>
+    </select>
+    <br>
+
+    <!-- Delivery Date -->
+    <label for="deliveryDate">Delivery Date:</label>
+    <input type="date"
+           id="deliveryDate"
+           name="deliveryDate"
+           th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+           th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+           required><br>
+
+    
+    <button type="submit">Complete Delivery</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

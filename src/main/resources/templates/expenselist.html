@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - expense list</title>
+    
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        function filterTable() {
+            let input = document.getElementById('searchInput'); // Get the search input
+            let filter = input.value.toLowerCase(); // Convert input to lowercase for case-insensitive search
+            let table = document.querySelector('table'); // Get the table element
+            let rows = table.getElementsByTagName('tr'); // Get all rows in the table
+
+            // Loop through the rows and hide the ones that don't match the search query
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName('td');
+                let expenceName = cells[1] ? cells[1].textContent.toLowerCase() : ''; // Get the expence Name cell text
+
+                if (expenceName.indexOf(filter) > -1) {
+                    rows[i].style.display = ''; // Show the row if it matches the filter
+                } else {
+                    rows[i].style.display = 'none'; // Hide the row if it doesn't match
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+          
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="tab-buttons">
+            <button ><a th:href="@{/expensedef}">Add expense</a></button>
+            
+        </div>
+        <div class="search-bar">
+            <label for="searchInput">Search expense:</label>
+            <input type="text" id="searchInput" placeholder="Search for expense..." onkeyup="filterTable()">
+        </div>
+        <div class="table-container">
+            <h3>expense types</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Expense ID</th>
+                        <th>expense Name</th>
+                        <th>description</th>
+                        <th>Actions</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="expense: ${expenses}">
+                        <td th:text="${expense.expenseID}"></td>
+                        <td th:text="${expense.expenseName}"></td>
+                        <td th:text="${expense.description}"></td>
+                        <td><a th:href="@{/expenseEdit/{expenseID}(expenseID=${expense.expenseID})}">
+                                <button class="edit">Edit</button>
+                            </a>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

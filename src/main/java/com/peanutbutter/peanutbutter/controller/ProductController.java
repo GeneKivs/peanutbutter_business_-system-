@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -80,6 +81,21 @@ public class ProductController {
             redirectAttributes.addFlashAttribute("errorMessage", "Product not found.");
         }
         return "redirect:/inventory";
+    }
+
+     @GetMapping("/productEdit/{productID}")
+    public String showProductEditfForm(Model model, @PathVariable("productID")int productID){
+        Product product = productService.getProductByID(productID);
+        model.addAttribute("product", product);
+
+        List<Unit> units = unitService.getAllUnits();
+        model.addAttribute("units", units);
+        return "productUpdate";
+    }
+
+    @PostMapping("/updateProduct")
+    public String updateProduct(){
+        return  "redirect:/inventory";
     }
 
 }

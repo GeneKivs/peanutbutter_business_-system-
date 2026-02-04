@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peanut Butter System - Edit expenditure Form</title>
+    
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="/Message.js"></script>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+           
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
+        <div class="form-container">
+            <h2>Edit Expenditure</h2>
+            <form th:action="@{/updateExpenditure}" th:obect="${expenditure}" method="post">
+                <input type="text" th:field="*{expenditureID}" hidden>
+                <label for="expenditureDate">Expenditure Date:</label>
+                <input type="date"
+                       id="expenditureDate"
+                       name="expenditureDate"
+                       th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       th:max="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       required>
+                <br><br>
+               
+
+
+                 <!-- List of expences with checkboxes and input for amount -->
+    <div th:each="expense : ${expenses}">
+        <input type="checkbox" name="expenseIDs" th:value="${expense.expenseID}" />
+        <span th:text="${expense.expenseName}"></span>
+        <input type="number" step="0.01" min="0" 
+               th:name="'amount_' + ${expense.expenseID}" 
+               placeholder="Amount Spent" />
+    </div>
+
+        <br>
+        <!-- ...existing code... -->
+<label for="paymentAccount">Paid From Account:</label>
+<select id="paymentAccount" name="paymentAccount" required>
+    <option value="">--Select Account--</option>
+    <option th:each="account : ${accounts}" th:value="${account.accountName}" th:text="${account.accountName}"></option>
+</select>
+<!-- ...existing code... -->
+
+                <button type="submit">Update Expenditure</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

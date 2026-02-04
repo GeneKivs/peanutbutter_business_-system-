@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,6 +39,18 @@ public class PaymentController {
         List <Payment> payments = paymentService.getAllPaymentTypes();
         model.addAttribute("payments", payments);
         return "paymentlist";
+    }
+
+    @GetMapping("/paymentEdit/{paymentID}")
+    public String showPaymentEditForm(@PathVariable("paymentID") int paymentID, Model model){
+        Payment payment = paymentService.getPaymentByID(paymentID);
+        model.addAttribute("payment", payment);
+        return "paymentEdit";
+    }
+    @PostMapping("/updatePayment")
+    public String updatePayment(@ModelAttribute("payment")Payment payment, RedirectAttributes redirectAttributes){
+        paymentService.updatePaymentType(payment);
+        return "redirect:/payments";
     }
 
 

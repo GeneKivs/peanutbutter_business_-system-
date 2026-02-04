@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peanut Butter Inventory Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            overflow: hidden;
+        }
+        .main-content {
+            overflow-y: auto;
+            height: calc(100vh - 60px);
+        }
+    </style>
+</head>
+<body>
+
+    
+   <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+           
+        </ul>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="main-content">
+        <div class="dashboard-cards">
+            <div class="card">
+                <h2>Sales summary</h2>
+            </div>
+            
+            <div class="card">
+            <a th:href="@{/salesOrder}">Create Sales Order</a>
+            </div>
+
+            
+            <div class="card">
+                <a th:href="@{/salesDelivery}">Delivery Form</a>
+            </div>
+
+            <div class="card" >
+                <a th:href="@{/productpricedef}">Define product price</a>
+            </div>
+
+            <div class="card" >
+                <a th:href="@{/paymentdef}">Define payment method</a>
+            </div>
+
+            
+        </div>
+        <div class="table-container">
+            <h3>sales</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>sales ID</th>
+                        <th>customer Name</th>
+                        <th> 800g tins</th>
+                        <th>400g tins</th>   
+                        <th>total</th>                     
+                        <th>Amount Paid</th>
+                        <th>Balance</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+<tr th:each="sales : ${salesList}">
+    <td th:text="${sales.salesid}"></td>
+    <td th:text="${sales.customer.customerName}"></td>
+    <td th:text="${@salesService.getProductCount(sales, '800g')}"></td>
+    <td th:text="${@salesService.getProductCount(sales, '400g')}"></td>
+    <td th:text="${sales.totalAmount}"></td>
+    <td th:text="${sales.amountPaid}"></td>
+    <td th:text="${sales.balance}"></td>
+</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>

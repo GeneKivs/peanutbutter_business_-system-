@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -54,6 +55,22 @@ public class CustomerController {
         List <Customer> customers = customerService.getAllCuatomers();
         model.addAttribute("customers", customers);
         return "customerlist";
+    }
+
+    @GetMapping("/customerEdit/{customerID}")
+    public String showCustomerEditForm(@PathVariable("customerID") int customerID, Model model){
+        Customer customer = customerService.getCustomerByID(customerID);
+        model.addAttribute("customer", customer);
+
+        List <Location> locations = locationService.getAllLocations();
+        model.addAttribute("locations", locations);
+        return "customerEdit";
+    }
+
+    @PostMapping("/updateCustomer")
+    public String updateCustomer(@ModelAttribute("customer") Customer customer, RedirectAttributes redirectAttributes){
+        customerService.updateCustomer(customer);
+        return "redirect:customers";
     }
 
 

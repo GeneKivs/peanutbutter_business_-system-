@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,6 +41,19 @@ public class LocationController {
         List <Location> locations = locationService.getAllLocations();
         model.addAttribute("locations", locations);
         return "locationlist";
+    }
+
+    @GetMapping("/locationEdit/{locationID}")
+    public String showLocationEditForm(@PathVariable("locationID")int locationID, Model model){
+        Location location = locationService.getLocationById(locationID);
+        model.addAttribute("location", location);
+        return "locationEdit";
+    }
+
+    @PostMapping("/updateLocation")
+    public String updateLocation(@ModelAttribute("location")Location location, RedirectAttributes redirectAttributes){
+        locationService.updateLocation(location);
+        return "redirect:/locations";
     }
 
 }

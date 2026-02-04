@@ -18,6 +18,10 @@ public class UnitService {
         unitRepository.save(unit);
     }
 
+    public Unit getUnitByID(int unitID){
+        return unitRepository.findById(unitID).orElse(null);
+    }
+
     public List<Unit> getAllUnits(){
         return unitRepository.findAll();
     }

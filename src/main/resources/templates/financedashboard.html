@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peanut Butter Finance Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+   <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Peanut Butter System</h1>
+        </div>
+        
+    </header>
+     <div class="sidebar">
+      
+        <ul class="nav-links">
+            <li><a th:href="@{/dashboard}" >Dashboard</a></li>
+            <li><a th:href="@{/inventory}" >inventory</a></li>
+            <li><a th:href="@{/salesDashboard}" >Sales</a></li>
+            <li><a th:href="@{/customerDashboard}">Customers</a></li>
+             <li><a th:href="@{/financeDashboard}">Finance</a></li>
+            
+        </ul>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="content">
+        <div class="dashboard-cards">
+            
+            
+            <div class="card">
+            <a th:href="@{/expenditures}">Expenditures</a>
+            </div>
+
+            
+            <div class="card">
+                <a th:href="@{/accountDef}">Accounts</a>
+            </div>
+
+            <div class="card" >
+                <a th:href="@{/expenses}">veiw expence list</a>
+            </div>
+
+            <div class="card" >
+                <a th:href="@{/productdef}">journaling</a>
+            </div>
+
+            
+            <div class="card" >
+                <a th:href="@{/Debtors}">Debtors</a>
+            </div>
+
+            
+        </div>
+    
+    </div>
+
+    
+
+</body>
+</html>

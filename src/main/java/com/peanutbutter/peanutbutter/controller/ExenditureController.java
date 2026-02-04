@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -59,12 +61,12 @@ public class ExenditureController {
     @PostMapping("/saveExpenditure")
     public String saveExpenditure(
             
-            @RequestParam(value = "expenceIDs") List<Integer> expenceIDs,
+            @RequestParam(value = "expenseIDs") List<Integer> expenseIDs,
             @RequestParam(value = "expenditureDate", required = false) String expenditureDate,
             @RequestParam("paymentAccount") String paymentAccount,
             HttpServletRequest request,
             RedirectAttributes redirectAttributes) {
-        expenditureService.definexpenditure(expenceIDs, expenditureDate, paymentAccount, request);;
+        expenditureService.definexpenditure(expenseIDs, expenditureDate, paymentAccount, request);;
         return "redirect:/expenditures";
     }
 
@@ -74,6 +76,31 @@ public class ExenditureController {
         model.addAttribute("expenditures", expenditures);
        
         return "expenditurelist";
+    }
+
+    @GetMapping("/expenditureEdit/{expenditureID}")
+    public String showExpenditurEditForm(@PathVariable("expenditureID")long expenditureID, Model model){
+        Expenditure expenditure = expenditureService.getExpenditureByID(expenditureID);
+        model.addAttribute("expenditure", expenditure);
+
+        List<Batch> batches = batchService.getAvailableBatches();
+        
+         model.addAttribute("batches", batches);
+
+         List<Account> accounts = accountRepository.findAllBankaccounts();
+         model.addAttribute("accounts", accounts);
+            
+        
+       
+
+        List<Expense> expenses = expenseService.getALlExpenses();
+        model.addAttribute("expenses", expenses);
+        return "expenditureEdit";
+    }
+
+    public String updateExpenditure(@ModelAttribute("expenditure")Expenditure expenditure, RedirectAttributes redirectAttributes){
+        expenditureService.updateExpenditure(expenditure);
+        return "redirect:/expenditures";
     }
 
 }

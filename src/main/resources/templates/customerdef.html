@@ -8,6 +8,8 @@
 
     </style>
     <link rel="stylesheet" href="/style.css">
+
+    <script src="/Message.js"></script>
 </head>
 <body>
 
@@ -31,6 +33,15 @@
     </div>
 
     <div class="main-content">
+        <!-- Success and Error Messages -->
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+            <button class="error-btn" onclick="closeMessage('error-message')">OK</button>
+        </div>
+        <div th:if="${successMessage}" class="success-message">
+            <p th:text="${successMessage}"></p>
+            <button class="success-btn" onclick="closeMessage('success-message')">OK</button>
+        </div>
         <div class="form-container">
             <h2>Customer Definition</h2>
             <form th:action="@{/saveCustomer}" method="post">

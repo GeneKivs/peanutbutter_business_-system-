@@ -63,6 +63,7 @@
                     <tr>
                         <th>payment ID</th>
                         <th>payment Type</th>
+                        <th>Actions</th>
                         
                     </tr>
                 </thead>
@@ -70,6 +71,9 @@
                     <tr th:each="payment : ${payments}">
                         <td th:text="${payment.paymentID}"></td>
                         <td th:text="${payment.paymentType}"></td>
+                        <td><a th:href="@{/paymentEdit/{paymentID}(paymentID=${payment.paymentID})}">
+                                <button class="edit">Edit</button>
+                            </a>
                         
                         
                     </tr>
