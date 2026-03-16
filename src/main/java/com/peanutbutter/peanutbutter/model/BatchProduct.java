@@ -21,6 +21,7 @@ public class BatchProduct {
     @ManyToOne
     @JoinColumn(name = "productID")
     private Product product;
+    
 
     private int productQuantity;
 

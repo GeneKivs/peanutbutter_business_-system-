@@ -1,10 +1,12 @@
 package com.peanutbutter.peanutbutter.model;
 
+import com.peanutbutter.peanutbutter.base.Auditable;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "customer")
+public class Customer extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerID;
@@ -15,9 +17,7 @@ public class Customer {
     
     private String phoneNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "locationID")
-    private Location location;
+   
 
     public String getFirstName(){
         return firstName;
@@ -35,13 +35,6 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Location getLocation(){
-        return location;
-    }
-
-    public void setLocation(Location location){
-        this.location = location;
-    }
 
     public int getCustomerID(){
         return customerID;
