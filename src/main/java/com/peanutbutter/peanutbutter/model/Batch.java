@@ -3,13 +3,14 @@ package com.peanutbutter.peanutbutter.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.peanutbutter.peanutbutter.base.Auditable;
 import com.peanutbutter.peanutbutter.model.enums.BatchStatus;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "batch")
-public class Batch {
+public class Batch extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

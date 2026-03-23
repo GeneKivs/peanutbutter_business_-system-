@@ -1,12 +1,14 @@
 package com.peanutbutter.peanutbutter.model;
 
+import com.peanutbutter.peanutbutter.base.Auditable;
+
 import jakarta.persistence.*;
 
 
 
 @Entity
 @Table(name = "expenses")
-public class Expense {
+public class Expense extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

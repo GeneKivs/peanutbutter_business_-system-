@@ -2,13 +2,14 @@ package com.peanutbutter.peanutbutter.model;
 
 import java.math.BigDecimal;
 
+import com.peanutbutter.peanutbutter.base.Auditable;
 import com.peanutbutter.peanutbutter.model.enums.ProductStatus;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "product")
+public class Product extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
