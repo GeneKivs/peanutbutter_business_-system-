@@ -7,7 +7,7 @@ public class BatchProductResponseDto {
 
     private Long batchProductID;
     private Long batchid;
-    private int productid;
+    private Long productid;
     private String productName;
     private int productQuantity;
     private int productRemQuantity;
@@ -31,11 +31,11 @@ public class BatchProductResponseDto {
         this.batchid = id;
     }
 
-    public int getProductID(){
+    public Long getProductID(){
         return productid;
     }
 
-    public void setProductID(int id){
+    public void setProductID(Long id){
         this.productid = id;
     }
 

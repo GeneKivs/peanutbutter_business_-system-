@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import com.peanutbutter.peanutbutter.model.Batch;
 import com.peanutbutter.peanutbutter.model.enums.BatchStatus;
 
-public interface BatchRepository extends JpaRepository<Batch,Integer>{
+public interface BatchRepository extends JpaRepository<Batch,Long>{
 
     @Query(value = """
             SELECT b .* FROM batch b

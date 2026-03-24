@@ -8,7 +8,7 @@ public class PaymentResponseDto {
     private Long paymentID;
     private LocalDate paymentDate;
     private Long salesID;
-    private int paymentMethodID;
+    private Long paymentMethodID;
     private String paymentType;
     private BigDecimal amount;
     private LocalDate createdAt;
@@ -30,11 +30,11 @@ public class PaymentResponseDto {
         this.salesID = id;
     }
 
-    public int getPaymentMethodID(){
+    public Long getPaymentMethodID(){
         return paymentMethodID;
     }
 
-    public void setPaymentMethodID(int id){
+    public void setPaymentMethodID(Long id){
         this.paymentMethodID = id;
     }
 

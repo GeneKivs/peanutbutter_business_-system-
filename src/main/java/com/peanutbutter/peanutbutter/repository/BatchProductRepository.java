@@ -8,7 +8,7 @@ import com.peanutbutter.peanutbutter.model.BatchProduct;
 
 public interface BatchProductRepository extends JpaRepository<BatchProduct,Long>{
 
-    BatchProduct findByBatch_BatchIDAndProduct_ProductID(int batchID, int productID);
+    BatchProduct findByBatch_BatchIDAndProduct_ProductID(Long batchID, int productID);
 
     @Query(value = "SELECT SUM(product_rem_quantity) FROM batch_product  WHERE batchID = :batchID ",nativeQuery = true)
     Integer sumRemainingQuantityByBatchID(@Param("batchID") int batchID);

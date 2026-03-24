@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 public class ExpenseResponseDto {
 
-    private int expenseID;
+    private Long expenseID;
     private String expenseName;
     private String description;
     private LocalDate createdAt;
     private LocalDate updatedAt;
 
-    public int getExpenseID(){
+    public Long getExpenseID(){
         return expenseID;
     }
 
-    public void setExpenseID(int id){
+    public void setExpenseID(Long id){
         this.expenseID = id;
     }
 

@@ -43,7 +43,7 @@ public class ExpenditureResponseDto {
         return paymentMethodID;
     }
 
-    public void stePaymentMethod(Long id){
+    public void setPaymentMethod(Long id){
         this.paymentMethodID = id;
     }
 

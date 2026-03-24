@@ -14,7 +14,7 @@ public class BatchProduct extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long batch_productID;
+    private Long batch_productID;
 
     @ManyToOne
     @JoinColumn(name = "batchID")
@@ -30,13 +30,13 @@ public class BatchProduct extends Auditable {
     private int productRemQuantity;
 
     @Column(precision = 10, scale = 2)
-    private BigDecimal productRevenue;
+    private BigDecimal costPerUnit;
 
-    public BigDecimal getProductRevenue() {
-        return productRevenue;
+    public BigDecimal getCostPerUnit() {
+        return costPerUnit;
     }
-    public void setProductRevenue(BigDecimal productRevenue) {
-        this.productRevenue = productRevenue;
+    public void setCostPerUnit(BigDecimal cost) {
+        this.costPerUnit = cost;
     }
     public int getProductRemQuantity() {
         return productRemQuantity;

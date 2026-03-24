@@ -1,5 +1,8 @@
 package com.peanutbutter.peanutbutter.dtos;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 public class SalesProductResponseDto {
 
     private Long salesProductID;
@@ -7,7 +10,9 @@ public class SalesProductResponseDto {
     private Long batchID;
     private Long productID;
     private int quantity;
-    private Double sellingPrice;
+    private BigDecimal sellingPrice;
+    private LocalDate createdAt;
+    private LocalDate updatedAT;
 
     public Long getSalesProductID() {
         return salesProductID;
@@ -49,12 +54,28 @@ public class SalesProductResponseDto {
         this.quantity = quantity;
     }
 
-    public Double getSellingPrice() {
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Double sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
+    }
+
+    public LocalDate getCreatedAT(){
+        return createdAt;
+    }
+
+    public void setCreatedAT(LocalDate date){
+        this.createdAt = date;
+    }
+
+    public LocalDate getUpdatedAt(){
+        return updatedAT;
+    }
+
+    public void setUpdatedAt(LocalDate date){
+        this.updatedAT = date;
     }
 
 }

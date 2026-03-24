@@ -30,7 +30,7 @@ public class SalesProduct extends Auditable{
     private int quantity;
 
     @Column(precision = 10, scale = 2)
-    private BigDecimal total;
+    private BigDecimal sellingPrice;
 
     public long getSalesProductID() {
         return salesProductID;
@@ -72,12 +72,12 @@ public class SalesProduct extends Auditable{
         this.quantity = quantity;
     }
 
-    public BigDecimal getTotal() {
-        return total;
+    public BigDecimal getSellingPrice() {
+        return sellingPrice;
     }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setSellingPrice(BigDecimal price) {
+        this.sellingPrice = price;
     }
 
 }

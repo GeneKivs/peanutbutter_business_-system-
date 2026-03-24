@@ -1,17 +1,17 @@
 package com.peanutbutter.peanutbutter.model;
 
-import java.math.BigDecimal;
 
+import com.peanutbutter.peanutbutter.base.Auditable;
 import com.peanutbutter.peanutbutter.model.enums.AccountType;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "accounts")
-public class Account {
+public class Account extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountID;
+    private Long accountID;
 
     @Column(name = "account_name")
     private String accountName;
@@ -21,17 +21,15 @@ public class Account {
     private AccountType accountType;
 
     
-   @Column(precision = 10, scale = 2)
-    private BigDecimal balance;
-
+   
     @Column(name = "account_category")
     private String accountCategory; // e.g., BANK, EXPENSE, CUSTOMER, etc.
 
-    public int getAccountID() {
+    public Long getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(int accountID) {
+    public void setAccountID(Long accountID) {
         this.accountID = accountID;
     }
 
@@ -51,13 +49,7 @@ public class Account {
         this.accountType = accountType;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
+   
 
     public String getAccountCategory() {
         return accountCategory;

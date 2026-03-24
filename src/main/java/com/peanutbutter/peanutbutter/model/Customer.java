@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class Customer extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerID;
+    private Long customerID;
     
     private String firstName;
 
@@ -36,11 +36,11 @@ public class Customer extends Auditable {
     }
 
 
-    public int getCustomerID(){
+    public Long getCustomerID(){
         return customerID;
     }
 
-    public void setCustomerID(int customerID){
+    public void setCustomerID(Long customerID){
         this.customerID = customerID;
     }
 

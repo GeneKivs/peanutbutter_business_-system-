@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.peanutbutter.peanutbutter.model.Account;
 
-public interface AccountRepository extends JpaRepository<Account, Integer> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Account findByAccountNameAndAccountCategory(String accountName, String accountCategory);
 

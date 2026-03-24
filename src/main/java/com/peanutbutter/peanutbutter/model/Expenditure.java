@@ -13,7 +13,7 @@ public class Expenditure extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long expenditureID;
+    private Long expenditureID;
 
     @ManyToOne
     @JoinColumn(name = "expenseID")
@@ -24,6 +24,10 @@ public class Expenditure extends Auditable {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal amountSpent;
+
+    @ManyToOne
+    @JoinColumn(name = "payment_method_id")
+    private PaymentMethod paymentMethod;
 
     public long getExpenditureID(){
         return expenditureID;
@@ -56,6 +60,14 @@ public class Expenditure extends Auditable {
 
     public void setAmountSpent(BigDecimal amountSpent){
         this.amountSpent = amountSpent;
+    }
+
+    public PaymentMethod getPaymentMethod(){
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod){
+        this.paymentMethod = paymentMethod;
     }
 
 }

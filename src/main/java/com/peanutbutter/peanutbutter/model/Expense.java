@@ -12,17 +12,17 @@ public class Expense extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int expenseID;
+    private Long expenseID;
 
     private String expenseName;
 
     private String description;
 
-    public int getExpenseID(){
+    public Long getExpenseID(){
         return expenseID;
     }
 
-    public void setExpenseID(int expenseID){
+    public void setExpenseID(Long expenseID){
         this.expenseID = expenseID;
     }
 

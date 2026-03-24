@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 public class PaymentMethodResponseDto {
 
-    private int paymentID;
+    private Long iD;
     private String paymentType;
     private LocalDate createdAT;
     private LocalDate updatedAt;
 
-    public int getPaymentID(){
-        return paymentID;
+    public Long getPaymentMethodID(){
+        return iD;
     }
 
-    public void setPaymentID(int id){
-        this.paymentID = id;
+    public void setPaymentMethodID(Long id){
+        this.iD = id;
     }
 
     public String getPaymentType(){

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class CustomerResponseDto {
 
-    private int customerId;
+    private Long customerId;
     private String firstName;
     private String lastName;
     private String customerName;
@@ -13,11 +13,11 @@ public class CustomerResponseDto {
     private LocalDate updatedAT;
 
 
-    public int getCustomerID(){
+    public Long getCustomerID(){
         return customerId;
     }
 
-    public void setCustomerID(int  id){
+    public void setCustomerID(Long id){
         this.customerId = id;
     }
 

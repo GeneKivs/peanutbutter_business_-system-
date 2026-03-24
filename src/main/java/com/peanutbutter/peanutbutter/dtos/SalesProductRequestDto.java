@@ -1,12 +1,14 @@
 package com.peanutbutter.peanutbutter.dtos;
 
+import java.math.BigDecimal;
+
 public class SalesProductRequestDto {
 
     private Long salesID;
     private Long batchID;
     private Long productID;
     private int quantity;
-    private Double sellingPrice;
+    private BigDecimal sellingPrice;
     public Long getSalesID() {
         return salesID;
     }
@@ -39,11 +41,11 @@ public class SalesProductRequestDto {
         this.quantity = quantity;
     }
 
-    public Double getSellingPrice() {
+    public BigDecimal getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(Double sellingPrice) {
+    public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
     } 
 

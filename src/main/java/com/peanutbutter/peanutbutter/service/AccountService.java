@@ -133,7 +133,7 @@ public void addAccountBalance(String paymentName, BigDecimal amount){
         }
     }
 
-    public void makeDebtPayment(String accountName, String paymentName, BigDecimal amount){
+    public void makeDebtPayment(String accountName BigDecimal amount){
         Account account = accountRepository.findByAccountNameAndAccountCategory(accountName,"CUSTOMER" );
         if (account != null) {
             BigDecimal currentCuatomerBalance = account.getBalance() != null ? account.getBalance() : BigDecimal.ZERO;

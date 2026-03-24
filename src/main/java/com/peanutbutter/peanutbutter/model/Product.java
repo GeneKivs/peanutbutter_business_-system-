@@ -3,7 +3,7 @@ package com.peanutbutter.peanutbutter.model;
 import java.math.BigDecimal;
 
 import com.peanutbutter.peanutbutter.base.Auditable;
-import com.peanutbutter.peanutbutter.model.enums.ProductStatus;
+
 
 import jakarta.persistence.*;
 
@@ -13,45 +13,23 @@ public class Product extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int productID;
+    private Long productID;
 
     private String productName;
 
-    private int quantityInStock;
+    
 
     @Column(precision = 10, scale = 2)
     private BigDecimal pricePerTin;
 
     private int reorderLevel;
 
-    @Enumerated(EnumType.STRING)
-    private ProductStatus productStatus;
 
-    public ProductStatus getProductStatus() {
-        return productStatus;
-    }
-
-    public void setProductStatus(ProductStatus productStatus) {
-        this.productStatus = productStatus;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "unitID")
-    private Unit unit;
-
-    public Unit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public int getProductID(){
+    public Long getProductID(){
         return productID;
     }
 
-    public void setProductID(int productID){
+    public void setProductID(Long productID){
         this.productID = productID;
     }
 
@@ -63,13 +41,7 @@ public class Product extends Auditable {
         this.productName = productName;
     }
 
-    public int getQuantityInStock(){
-        return quantityInStock;
-    }
-
-    public void setQuantityInStock(int stock){
-        this.quantityInStock = stock;
-    }
+   
 
     public BigDecimal getPricePerTin(){
         return pricePerTin;
@@ -87,8 +59,6 @@ public class Product extends Auditable {
         this.reorderLevel = reorderlevel;
     }
 
-    public String getQuantity(){
-        return quantityInStock + "" + unit;
-    }
+   
 
 }
