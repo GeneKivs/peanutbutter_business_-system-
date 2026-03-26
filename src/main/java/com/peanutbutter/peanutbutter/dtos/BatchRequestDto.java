@@ -1,13 +1,11 @@
 package com.peanutbutter.peanutbutter.dtos;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class BatchRequestDto {
 
     private LocalDate receivedDate;
-    private int peanutQuantity;
-    private BigDecimal amountPaid;
+    private Long purchaseID;
 
     public LocalDate getReceivedDate(){
         return receivedDate;
@@ -17,20 +15,14 @@ public class BatchRequestDto {
         this.receivedDate = date;
     }
 
-    public int getPeanutQuantity(){
-        return peanutQuantity;
+     public Long getPurchaseID(){
+        return purchaseID;
     }
 
-    public void setPeanutQuantity(int quantity ){
-        this.peanutQuantity = quantity;
+    public void setPurchaseID(Long id){
+        this.purchaseID = id;
     }
 
-    public BigDecimal getAmountPaid(){
-        return amountPaid;
-    }
-
-    public void setAmountPaid(BigDecimal amount){
-        this.amountPaid = amount;
-    }
+    
 
 }
