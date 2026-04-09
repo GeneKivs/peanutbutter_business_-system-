@@ -24,6 +24,8 @@ public class Product extends Auditable {
 
     private int reorderLevel;
 
+    private Double size;
+
 
     public Long getProductID(){
         return productID;
@@ -57,6 +59,14 @@ public class Product extends Auditable {
 
     public void setReorderLevel(int reorderlevel){
         this.reorderLevel = reorderlevel;
+    }
+
+    public Double getSize(){
+        return size;
+    }
+
+    public void setSize(Double size){
+        this.size = size;
     }
 
    

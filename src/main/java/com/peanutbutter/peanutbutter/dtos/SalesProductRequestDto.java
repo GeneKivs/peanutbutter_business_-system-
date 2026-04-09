@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class SalesProductRequestDto {
 
     private Long salesID;
-    private Long batchID;
+    private Long batchProductID;
     private Long productID;
     private int quantity;
     private BigDecimal sellingPrice;
@@ -17,19 +17,19 @@ public class SalesProductRequestDto {
         this.salesID = salesID;
     }
 
-    public Long getBatchID() {
-        return batchID;
+    public Long getBatchProductID() {
+        return batchProductID;
     }
 
-    public void setBatchID(Long batchID) {
-        this.batchID = batchID;
+    public void setBatchProductID(Long id) {
+        this.batchProductID = id;
     }
 
-    public Long getProductID() {
+    public Long getProductID(){
         return productID;
     }
 
-    public void setProductID(Long productID) {
+    public void setProductID(Long productID){
         this.productID = productID;
     }
 

@@ -19,13 +19,11 @@ public class SalesProduct extends Auditable{
     @JoinColumn(name = "salesID")
     private Sales sales;
 
-    @ManyToOne
-    @JoinColumn(name =  "batchID")
-    private Batch batch;
+  
 
     @ManyToOne
-    @JoinColumn(name = "productID")
-    private Product product;
+    @JoinColumn(name = "batch_productid")
+    private BatchProduct batchProduct;
 
     private int quantity;
 
@@ -48,20 +46,14 @@ public class SalesProduct extends Auditable{
         this.sales = sales;
     }
 
-    public Batch getBatch() {
-        return batch;
+    
+
+    public BatchProduct  getProducts() {
+        return batchProduct;
     }
 
-    public void setBatch(Batch batch) {
-        this.batch = batch;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(BatchProduct products) {
+        this.batchProduct = products;
     }
 
     public int getQuantity() {

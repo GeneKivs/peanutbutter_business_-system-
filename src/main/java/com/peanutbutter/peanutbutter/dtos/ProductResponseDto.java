@@ -10,6 +10,7 @@ public class ProductResponseDto {
     private int reorderLevel;
     private BigDecimal pricePerTin;
     private int availableStock;
+    private Double size;
     private LocalDate createdAT;
     private LocalDate updatedAT;
 
@@ -67,6 +68,14 @@ public class ProductResponseDto {
 
     public void setUpdatedAt(LocalDate date){
         this.updatedAT = date;
+    }
+
+    public Double getSize(){
+        return size;
+    }
+
+    public void setSize(Double size){
+        this.size = size;
     }
 
 }

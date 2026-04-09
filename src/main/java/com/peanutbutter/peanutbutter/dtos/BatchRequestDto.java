@@ -1,11 +1,13 @@
 package com.peanutbutter.peanutbutter.dtos;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class BatchRequestDto {
 
     private LocalDate receivedDate;
     private Long purchaseID;
+    private List<BatchProductRequestDto> products;
 
     public LocalDate getReceivedDate(){
         return receivedDate;
@@ -22,6 +24,12 @@ public class BatchRequestDto {
     public void setPurchaseID(Long id){
         this.purchaseID = id;
     }
+
+    public List<BatchProductRequestDto> getProducts(){
+        return products;
+    }
+
+    
 
     
 

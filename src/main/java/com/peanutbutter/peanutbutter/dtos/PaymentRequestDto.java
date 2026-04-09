@@ -7,7 +7,7 @@ public class PaymentRequestDto {
 
     private LocalDate paymentDate;
     private Long salesID;
-    private int paymentMethodID;
+    private Long paymentMethodID;
     private BigDecimal amount;
 
     public Long getSalesID(){
@@ -18,11 +18,11 @@ public class PaymentRequestDto {
         this.salesID = id;
     }
 
-    public int getPaymentMethodID(){
+    public Long getPaymentMethodID(){
         return paymentMethodID;
     }
 
-    public void setPaymentMethodID(int id){
+    public void setPaymentMethodID(Long id){
         this.paymentMethodID = id;
     }
 

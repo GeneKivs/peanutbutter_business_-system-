@@ -1,12 +1,15 @@
 package com.peanutbutter.peanutbutter.dtos;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class SalesResponseDto {
 
     private Long salesID;
     private Long customerID;
     private String customerName;
+    private List<SalesProductResponseDto> products;
+    private List<PaymentResponseDto> payment;
     private LocalDate salesDate;
     private LocalDate createdAt;
     private LocalDate updatedAt;
@@ -53,6 +56,22 @@ public class SalesResponseDto {
 
     public LocalDate getUpdatedAt(){
         return updatedAt;
+    }
+
+    public List<SalesProductResponseDto> getProducts(){
+        return products;
+    }
+
+    public void setProducts(List<SalesProductResponseDto> products){
+        this.products = products;
+    }
+
+    public List<PaymentResponseDto> getPayment(){
+        return payment;
+    }
+
+    public void setPayment(List<PaymentResponseDto> payment){
+        this.payment = payment;
     }
 
     public void setUpdatedAt(LocalDate date){

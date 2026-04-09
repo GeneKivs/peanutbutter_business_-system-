@@ -7,6 +7,7 @@ public class ProductRequestDto {
     private String productName;
     private int reorderLevel;
     private BigDecimal pricePerTin;
+    private Double size;
 
     public String getProductName(){
         return productName;
@@ -30,6 +31,15 @@ public class ProductRequestDto {
 
     public void setPricePerTin(BigDecimal price){
         this.pricePerTin = price;
+    }
+
+    public Double getSize(){
+        return size;
+    }
+
+    public void setSize(Double size){
+        this.size = size;
+
     }
 
 }

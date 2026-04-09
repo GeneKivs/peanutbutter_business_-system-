@@ -4,23 +4,17 @@ package com.peanutbutter.peanutbutter.dtos;
 
 public class BatchProductRequestDto {
 
-    private Long batchID;
-    private int productID;
+    private Long productID;
     private int productQuantity;
+   
 
-    public Long getBatchID(){
-        return batchID;
-    }
+    
 
-    public void setBatchID(Long  id){
-        this.batchID = id;
-    }
-
-    public int getProductId(){
+    public Long getProductId(){
         return productID;
     }
 
-    public void setProductID(int id){
+    public void setProductID(Long id){
         this.productID = id;
     }
 
@@ -31,5 +25,7 @@ public class BatchProductRequestDto {
     public void setProductQuantity(int quantity){
         this.productQuantity = quantity;
     }
+
+    
 
 }

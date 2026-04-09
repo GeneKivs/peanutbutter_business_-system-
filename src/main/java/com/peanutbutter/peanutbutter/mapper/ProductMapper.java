@@ -17,6 +17,7 @@ public class ProductMapper {
         product.setProductName(dto.getProductName());
         product.setReorderLevel(dto.getReorderLevel());
         product.setPricePerTin(dto.getPricePerTin());
+        product.setSize(dto.getSize());
 
         return product;
     }
@@ -30,6 +31,7 @@ public class ProductMapper {
         dto.setProductID(product.getProductID());
         dto.setProductName(product.getProductName());
         dto.setPricePerTin(product.getPricePerTin());
+        dto.setSize(product.getSize());
         dto.setCreatedAt(product.getCreatedAt());
         dto.setUpdatedAt(product.getUpdatedAt());
 

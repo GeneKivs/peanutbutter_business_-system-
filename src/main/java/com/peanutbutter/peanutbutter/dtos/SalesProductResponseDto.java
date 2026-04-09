@@ -7,10 +7,10 @@ public class SalesProductResponseDto {
 
     private Long salesProductID;
     private Long salesID;
-    private Long batchID;
     private Long productID;
     private int quantity;
     private BigDecimal sellingPrice;
+    private BigDecimal total;
     private LocalDate createdAt;
     private LocalDate updatedAT;
 
@@ -30,13 +30,8 @@ public class SalesProductResponseDto {
         this.salesID = salesID;
     }
 
-    public Long getBatchID() {
-        return batchID;
-    }
 
-    public void setBatchID(Long batchID) {
-        this.batchID = batchID;
-    }
+    
 
     public Long getProductID() {
         return productID;
@@ -60,6 +55,14 @@ public class SalesProductResponseDto {
 
     public void setSellingPrice(BigDecimal sellingPrice) {
         this.sellingPrice = sellingPrice;
+    }
+
+    public BigDecimal getTotal(){
+        return total;
+    }
+
+    public void setTotal(BigDecimal total){
+        this.total = total;
     }
 
     public LocalDate getCreatedAT(){

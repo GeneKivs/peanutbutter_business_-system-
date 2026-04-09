@@ -1,11 +1,16 @@
 package com.peanutbutter.peanutbutter.dtos;
 
 import java.time.LocalDate;
+import java.util.List;
+
+
 
 public class SalesRequestDto {
 
     private Long customerID;
     private LocalDate salesDate;
+    private List<SalesProductRequestDto> saleproducts;
+    private List<PaymentRequestDto> payments;
     
 
     public Long getCustomerID(){
@@ -23,5 +28,16 @@ public class SalesRequestDto {
     public void setSalesDate(LocalDate date){
         this.salesDate = date;
     }
+
+    
+
+    public List<SalesProductRequestDto> getSaleProducts(){
+        return saleproducts;
+    }
+
+    public List<PaymentRequestDto> getPayments(){
+        return payments;
+    }
+
 
 }

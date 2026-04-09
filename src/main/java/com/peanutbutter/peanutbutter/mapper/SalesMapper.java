@@ -16,6 +16,7 @@ public class SalesMapper {
             dto.setCustomerID(sales.getCustomer().getCustomerID());
             dto.setCustomerName(sales.getCustomer().getCustomerName());
         }
+        dto.getProducts();
         dto.setCreatedAT(sales.getCreatedAt());
         dto.setUpdatedAt(sales.getUpdatedAt());
 

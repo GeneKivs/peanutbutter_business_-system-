@@ -16,7 +16,7 @@ public static BatchResponseDto toResponse(Batch batch){
     }
 
     BatchResponseDto dto = new BatchResponseDto();
-    //batch id is not yet set need to update itto long
+
     dto.setBatchID(batch.getBatchID());
     dto.setReceivedDate(batch.getReceivedDate());
     if (batch.getPurchase() != null) {
