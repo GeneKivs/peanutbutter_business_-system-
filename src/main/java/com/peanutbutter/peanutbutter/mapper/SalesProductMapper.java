@@ -12,12 +12,7 @@ public class SalesProductMapper {
 
         dto.setSalesProductID(salesProduct.getSalesProductID());
         dto.setQuantity(salesProduct.getQuantity());
-        if (salesProduct.getBatch() != null) {
-            dto.setBatchID(salesProduct.getBatch().getBatchID());
-        }
-        if (salesProduct.getProduct() != null) {
-            dto.setProductID(salesProduct.getProduct().getProductID());
-        }
+       
 
         if (salesProduct.getSales() != null) {
             dto.setSalesID(salesProduct.getSales().getSalesid());

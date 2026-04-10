@@ -28,6 +28,8 @@ public class CustomerMapper {
 
         CustomerResponseDto dto = new CustomerResponseDto();
         dto.setCustomerID(customer.getCustomerID());
+        dto.setFirstName(customer.getFirstName());
+        dto.setLastName(customer.getLastName());
         String fullName = customer.getFirstName() + " " + customer.getLastName();
         dto.setCustomerName(fullName);
         dto.setPhoneNumber(customer.getPhoneNumber());

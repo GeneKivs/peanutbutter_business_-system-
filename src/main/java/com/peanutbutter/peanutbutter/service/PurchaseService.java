@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.peanutbutter.peanutbutter.dtos.PurchaseRequestDto;
 import com.peanutbutter.peanutbutter.dtos.PurchaseResponseDto;
+import com.peanutbutter.peanutbutter.model.Purchase;
 
 public interface PurchaseService {
 
@@ -11,6 +12,7 @@ public interface PurchaseService {
     PurchaseResponseDto getPurchaseByID(Long purchaseID);
     List<PurchaseResponseDto> getAllPurchases();
     PurchaseResponseDto updatePurchase(Long purchaseID,PurchaseRequestDto requestDto);
+    void purchaseAccounting(Purchase purchase);
 
 
 }

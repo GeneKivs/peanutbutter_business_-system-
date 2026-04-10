@@ -11,24 +11,31 @@ import com.peanutbutter.peanutbutter.dtos.SalesProductRequestDto;
 import com.peanutbutter.peanutbutter.dtos.SalesProductResponseDto;
 import com.peanutbutter.peanutbutter.dtos.SalesRequestDto;
 import com.peanutbutter.peanutbutter.dtos.SalesResponseDto;
+import com.peanutbutter.peanutbutter.model.Account;
 import com.peanutbutter.peanutbutter.model.BatchProduct;
 import com.peanutbutter.peanutbutter.model.Customer;
+import com.peanutbutter.peanutbutter.model.JournalEntry;
+import com.peanutbutter.peanutbutter.model.JournalLine;
 import com.peanutbutter.peanutbutter.model.Payment;
 import com.peanutbutter.peanutbutter.model.PaymentMethod;
 import com.peanutbutter.peanutbutter.model.Sales;
 import com.peanutbutter.peanutbutter.model.SalesProduct;
+import com.peanutbutter.peanutbutter.repository.AccountRepository;
 import com.peanutbutter.peanutbutter.repository.BatchProductRepository;
 import com.peanutbutter.peanutbutter.repository.BatchRepository;
 import com.peanutbutter.peanutbutter.repository.CustomerRepository;
+import com.peanutbutter.peanutbutter.repository.JournalEntryRepository;
+import com.peanutbutter.peanutbutter.repository.JournalLineRepository;
 import com.peanutbutter.peanutbutter.repository.PaymentMethodRepository;
 import com.peanutbutter.peanutbutter.repository.PaymentRepository;
 import com.peanutbutter.peanutbutter.repository.SalesProductRepository;
 import com.peanutbutter.peanutbutter.repository.SalesRepository;
+import com.peanutbutter.peanutbutter.service.SalesServiceApi;
 
 import jakarta.transaction.Transactional;
 
 @Service
-public class SalesServiceImpl {
+public class SalesServiceImpl implements SalesServiceApi{
 
     private final SalesRepository salesRepository;
     private final SalesProductRepository salesProductRepository;
@@ -36,17 +43,33 @@ public class SalesServiceImpl {
     private final PaymentMethodRepository paymentMethodRepository;
     private final BatchProductRepository batchProductRepository;
     private final CustomerRepository customerRepository;
+    private final JournalEntryRepository journalEntryRepository;
+    private final JournalLineRepository journalLineRepository;
+    private final AccountRepository accountRepository;
 
-    public SalesServiceImpl(SalesRepository salesRepository,SalesProductRepository salesProductRepository,PaymentMethodRepository paymentMethodRepository,PaymentRepository paymentRepository,BatchProductRepository batchProductRepository,BatchRepository batchRepository,CustomerRepository customerRepository){
+    public SalesServiceImpl(SalesRepository salesRepository,
+            SalesProductRepository salesProductRepository,
+            PaymentMethodRepository paymentMethodRepository,
+            PaymentRepository paymentRepository,
+            BatchProductRepository batchProductRepository,
+            BatchRepository batchRepository,
+            CustomerRepository customerRepository,
+            JournalEntryRepository journalEntryRepository,
+            JournalLineRepository journalLineRepository,
+            AccountRepository accountRepository){
         this.batchProductRepository = batchProductRepository;
         this.paymentMethodRepository = paymentMethodRepository;
         this.paymentRepository = paymentRepository;
         this.salesProductRepository = salesProductRepository;
         this.salesRepository = salesRepository;
         this.customerRepository = customerRepository;
+        this.journalEntryRepository = journalEntryRepository;
+        this.journalLineRepository = journalLineRepository;
+        this.accountRepository =  accountRepository;
     }
 
     @Transactional
+    @Override
     public SalesResponseDto processSales(SalesRequestDto requestDto){
         //find the customer involved
         Customer customer = customerRepository.findById(requestDto.getCustomerID()).orElseThrow(()-> new RuntimeException("Customer not found"));
@@ -121,7 +144,9 @@ public class SalesServiceImpl {
             payment.setSales(savedSales);
             payment.setAmount(paymentRequestDto.getAmount());
 
-            paymentRepository.save(payment);
+           paymentRepository.save(payment);
+
+            
 
             PaymentResponseDto responsePayment = new PaymentResponseDto();
             responsePayment.setPaymentDate(paymentRequestDto.getPaymentDate());
@@ -131,6 +156,8 @@ public class SalesServiceImpl {
             responsePayments.add(responsePayment);
 
         }
+
+        
 
         SalesResponseDto response = new SalesResponseDto();
         response.setSalesID(savedSales.getSalesid());
@@ -144,6 +171,33 @@ public class SalesServiceImpl {
 
 
 
+    }
+
+
+    public void salesAccounting(Sales sales,Payment payment){
+
+        JournalEntry entry = new JournalEntry();
+        entry.setEntryDate(sales.getSalesOrderDate());
+        entry.setReferenceID(sales.getSalesid());
+
+        JournalEntry savedEntry = journalEntryRepository.save(entry);
+
+        Account salesAcc = accountRepository.findByAccountName("Sales");
+        Account paymentAcc = accountRepository.findByAccountName(payment.getPaymentMethod().getPaymentType());
+
+        JournalLine debit = new JournalLine();
+        debit.setJournalEntry(savedEntry);
+        debit.setAccount(paymentAcc);
+        debit.setDebit(payment.getAmount());
+
+        journalLineRepository.save(debit);
+
+        JournalLine credit = new JournalLine();
+        credit.setJournalEntry(savedEntry);
+        credit.setAccount(salesAcc);
+        credit.setCredit(payment.getAmount());
+
+        journalLineRepository.save(credit);
     }
 
 
