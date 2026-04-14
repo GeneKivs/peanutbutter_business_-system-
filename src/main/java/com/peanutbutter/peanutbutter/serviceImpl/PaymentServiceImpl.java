@@ -14,6 +14,7 @@ import com.peanutbutter.peanutbutter.model.Sales;
 import com.peanutbutter.peanutbutter.repository.PaymentMethodRepository;
 import com.peanutbutter.peanutbutter.repository.PaymentRepository;
 import com.peanutbutter.peanutbutter.repository.SalesRepository;
+import com.peanutbutter.peanutbutter.service.AccountingService;
 import com.peanutbutter.peanutbutter.service.PaymentServiceApi;
 
 @Service
@@ -22,8 +23,13 @@ public class PaymentServiceImpl implements PaymentServiceApi{
     private final PaymentMethodRepository paymentMethodRepository;
     private final PaymentRepository paymentRepository;
     private final SalesRepository salesRepository;
+    private final AccountingService accountingService;
+   
 
-    public PaymentServiceImpl(PaymentMethodRepository paymentMethodRepository,PaymentRepository paymentRepository,SalesRepository salesRepository){
+
+
+    public PaymentServiceImpl(PaymentMethodRepository paymentMethodRepository,PaymentRepository paymentRepository,SalesRepository salesRepository,AccountingService accountingService){
+        this.accountingService = accountingService;
         this.paymentMethodRepository = paymentMethodRepository;
         this.paymentRepository = paymentRepository;
         this.salesRepository =salesRepository;
@@ -41,6 +47,7 @@ public class PaymentServiceImpl implements PaymentServiceApi{
         payment.setAmount(requestDto.getAmount());
 
         Payment savedPayment = paymentRepository.save(payment);
+        accountingService.paymentAccounting(savedPayment);
 
         return PaymentMapper.toResponseDto(savedPayment);
     }
@@ -79,6 +86,7 @@ public class PaymentServiceImpl implements PaymentServiceApi{
 
     }
 
+   
 
 
 }

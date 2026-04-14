@@ -9,7 +9,7 @@ import com.peanutbutter.peanutbutter.model.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    Account findByAccountNameAndAccountCategory(String accountName, String accountCategory);
+  
 
     @Query(value = "select * from accounts where account_category = 'BANK'  AND account_type = 'ASSET'",nativeQuery = true)
     List<Account> findAllBankaccounts();

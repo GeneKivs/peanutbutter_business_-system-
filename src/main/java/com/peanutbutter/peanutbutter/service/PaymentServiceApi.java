@@ -5,6 +5,7 @@ import java.util.List;
 import com.peanutbutter.peanutbutter.dtos.PaymentRequestDto;
 import com.peanutbutter.peanutbutter.dtos.PaymentResponseDto;
 
+
 public interface PaymentServiceApi {
 
     PaymentResponseDto makePayment(PaymentRequestDto requestDto);
@@ -14,5 +15,7 @@ public interface PaymentServiceApi {
     List<PaymentResponseDto> getAllPayments();
 
     PaymentResponseDto patchPayment(Long paymentID,PaymentRequestDto requestDto);
+
+  
 
 }

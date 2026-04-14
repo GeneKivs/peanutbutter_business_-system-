@@ -34,7 +34,7 @@ public class PaymentMethodController {
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }
 
-    @GetMapping("/paymentMethodID")
+    @GetMapping("/{paymentMethodID}")
     public ResponseEntity<PaymentMethodResponseDto> getPaymentMethod(@PathVariable Long paymentMethodID){
         PaymentMethodResponseDto responseDto = paymentMethodService.getPaymentMethodByID(paymentMethodID);
 
@@ -48,7 +48,7 @@ public class PaymentMethodController {
         return ResponseEntity.ok(paymentMethods);
     }
 
-    @PatchMapping("/paymentMethodID")
+    @PatchMapping("/{paymentMethodID}")
     public ResponseEntity<PaymentMethodResponseDto> updatePaymentMethod(@PathVariable Long paymentMethodID,@RequestBody PaymentMethodRequestDto requestDto){
         PaymentMethodResponseDto responseDto = paymentMethodService.updatePaymentMethod(paymentMethodID, requestDto);
 

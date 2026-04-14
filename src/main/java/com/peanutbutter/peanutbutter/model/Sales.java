@@ -21,6 +21,7 @@ public class Sales extends Auditable {
     @JoinColumn(name = "customerID")
     private Customer customer;
 
+    @Column(name = "sales_date")
     private LocalDate  salesOrderDate;
 
    

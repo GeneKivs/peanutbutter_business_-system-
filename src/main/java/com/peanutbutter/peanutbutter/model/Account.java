@@ -22,9 +22,6 @@ public class Account extends Auditable{
 
     
    
-    @Column(name = "account_category")
-    private String accountCategory; // e.g., BANK, EXPENSE, CUSTOMER, etc.
-
     public Long getAccountID() {
         return accountID;
     }
@@ -51,13 +48,7 @@ public class Account extends Auditable{
 
    
 
-    public String getAccountCategory() {
-        return accountCategory;
-    }
-
-    public void setAccountCategory(String accountCategory) {
-        this.accountCategory = accountCategory;
-    }
+   
 
 
 

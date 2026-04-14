@@ -16,7 +16,7 @@ public interface BatchProductRepository extends JpaRepository<BatchProduct,Long>
         value = """
             SELECT * FROM batch_product 
             WHERE productid = :productID AND product_rem_quantity > 0
-            ORDER BY createdAT ASC""",nativeQuery = true)
+            ORDER BY created_AT ASC""",nativeQuery = true)
     List<BatchProduct> findByProductIDAndProductRemQuantity(Long productID);
 
     @Query(value = "SELECT * FROM batch_product WHERE batchID = :batchID",nativeQuery = true)

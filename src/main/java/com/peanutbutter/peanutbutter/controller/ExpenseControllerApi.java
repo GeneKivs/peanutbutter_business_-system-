@@ -33,14 +33,14 @@ public class ExpenseControllerApi {
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }  
 
-    @GetMapping("/expenseID")
+    @GetMapping("/{expenseID}")
     public ResponseEntity<ExpenseResponseDto> getExpense(@PathVariable Long expenseID){
         ExpenseResponseDto responseDto = expenseServiceApi.getExpenseByID(expenseID);
 
         return responseDto != null? ResponseEntity.ok(responseDto) : ResponseEntity.notFound().build();
     }
 
-    @PatchMapping("/expenseID")
+    @PatchMapping("/{expenseID}")
     public ResponseEntity<ExpenseResponseDto> updateExpense(@PathVariable Long expenseID,@RequestBody ExpenseRequestDto requestDto){
         ExpenseResponseDto responseDto = expenseServiceApi.updateExpense(expenseID, requestDto);
 

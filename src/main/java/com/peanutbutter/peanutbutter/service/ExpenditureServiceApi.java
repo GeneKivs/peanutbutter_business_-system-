@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.peanutbutter.peanutbutter.dtos.ExpenditureRequestDto;
 import com.peanutbutter.peanutbutter.dtos.ExpenditureResponseDto;
-import com.peanutbutter.peanutbutter.model.Expenditure;
 
 public interface ExpenditureServiceApi {
 
@@ -16,6 +15,6 @@ public interface ExpenditureServiceApi {
 
     ExpenditureResponseDto updateExpenditure(Long expenditureID, ExpenditureRequestDto requestDto);
 
-    void expenditureAccounting(Expenditure expenditure);
+    
 
 }

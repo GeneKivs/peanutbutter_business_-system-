@@ -12,7 +12,7 @@ import com.peanutbutter.peanutbutter.dtos.SalesResponseDto;
 import com.peanutbutter.peanutbutter.service.SalesServiceApi;
 
 @RestController
-@RequestMapping("api/sales")
+@RequestMapping("/api/sales")
 public class SalesControllerApi {
 
     private final SalesServiceApi salesServiceApi;

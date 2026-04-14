@@ -9,7 +9,7 @@ public class SalesRequestDto {
 
     private Long customerID;
     private LocalDate salesDate;
-    private List<SalesProductRequestDto> saleproducts;
+    private List<SalesProductRequestDto> saleProducts;
     private List<PaymentRequestDto> payments;
     
 
@@ -32,7 +32,7 @@ public class SalesRequestDto {
     
 
     public List<SalesProductRequestDto> getSaleProducts(){
-        return saleproducts;
+        return saleProducts;
     }
 
     public List<PaymentRequestDto> getPayments(){

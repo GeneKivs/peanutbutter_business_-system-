@@ -17,7 +17,7 @@ import com.peanutbutter.peanutbutter.dtos.PurchaseResponseDto;
 import com.peanutbutter.peanutbutter.service.PurchaseService;
 
 @RestController
-@RequestMapping("/api/Purchases")
+@RequestMapping("/api/purchases")
 public class PurchaseController {
 
     
@@ -35,7 +35,7 @@ public class PurchaseController {
         return new ResponseEntity<>(responseDto,HttpStatus.CREATED);
     }
 
-    @GetMapping("/purchaseID")
+    @GetMapping("/{purchaseID}")
     public ResponseEntity<PurchaseResponseDto> getPurchase(@PathVariable Long purchaseID){
         PurchaseResponseDto responseDto = purchaseService.getPurchaseByID(purchaseID);
 
@@ -49,7 +49,7 @@ public class PurchaseController {
         return ResponseEntity.ok(responseDtos);
     }
 
-    @PatchMapping("/purchaseID")
+    @PatchMapping("/{purchaseID}")
     public ResponseEntity<PurchaseResponseDto> updatePurchase(@PathVariable Long purchaseID,@RequestBody PurchaseRequestDto requestDto){
         PurchaseResponseDto responseDto = purchaseService.updatePurchase(purchaseID, requestDto);
 

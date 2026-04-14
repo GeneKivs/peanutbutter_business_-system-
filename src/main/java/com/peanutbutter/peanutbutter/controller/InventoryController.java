@@ -23,7 +23,7 @@ public class InventoryController {
         this.batchServiceApi = batchServiceApi;
     }
 
-    @PostMapping
+    @PostMapping("/batches")
     public ResponseEntity<BatchResponseDto> recieveBatch(@RequestBody BatchRequestDto requestDto){
         BatchResponseDto responseDto = batchServiceApi.createBatch(requestDto);
 
