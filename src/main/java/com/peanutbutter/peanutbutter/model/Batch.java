@@ -8,6 +8,7 @@ import com.peanutbutter.peanutbutter.base.Auditable;
 
 import jakarta.persistence.*;
 
+//its like grn for receiving purchased goods since its done against the purchase order
 @Entity
 @Table(name = "batch")
 public class Batch extends Auditable{

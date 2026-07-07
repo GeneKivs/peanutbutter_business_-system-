@@ -3,6 +3,7 @@ package com.peanutbutter.peanutbutter.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import com.peanutbutter.peanutbutter.service.AccountService;
 
 @RestController
 @RequestMapping("/api/accounts")
+@CrossOrigin(origins = "*")
 public class AccountController {
 
     private final AccountService accountService;

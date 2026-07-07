@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 //links batch to a product
 
 @Entity
-@Table(name = "batch_product")
+@Table(name = "batch_product")//details table to store details of the order recieved
 public class BatchProduct extends Auditable {
 
     @Id

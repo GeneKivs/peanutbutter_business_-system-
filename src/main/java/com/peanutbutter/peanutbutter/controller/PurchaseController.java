@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import com.peanutbutter.peanutbutter.service.PurchaseService;
 
 @RestController
 @RequestMapping("/api/purchases")
+@CrossOrigin(origins = "*")
 public class PurchaseController {
 
     
