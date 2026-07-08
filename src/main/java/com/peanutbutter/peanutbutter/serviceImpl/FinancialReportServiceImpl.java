@@ -16,22 +16,20 @@ import com.peanutbutter.peanutbutter.dtos.IncomeStatementDto;
 import com.peanutbutter.peanutbutter.dtos.LedgerEntryDto;
 import com.peanutbutter.peanutbutter.model.Account;
 import com.peanutbutter.peanutbutter.model.JournalLine;
-import com.peanutbutter.peanutbutter.repository.AccountRepository;
+//import com.peanutbutter.peanutbutter.repository.AccountRepository;
 import com.peanutbutter.peanutbutter.repository.JournalLineRepository;
-import com.peanutbutter.peanutbutter.repository.JournalEntryRepository;
+//import com.peanutbutter.peanutbutter.repository.JournalEntryRepository;
 import com.peanutbutter.peanutbutter.service.FinancialReportService;
 
 @Service
 public class FinancialReportServiceImpl implements FinancialReportService {
 
     private final JournalLineRepository journalLineRepository;
-    private final JournalEntryRepository journalEntryRepository;
-    private final AccountRepository accountRepository;
+   
 
-    public FinancialReportServiceImpl(JournalLineRepository journalLineRepository, JournalEntryRepository journalEntryRepository, AccountRepository accountRepository){
+    public FinancialReportServiceImpl(JournalLineRepository journalLineRepository){
         this.journalLineRepository = journalLineRepository;
-        this.journalEntryRepository = journalEntryRepository;
-        this.accountRepository = accountRepository;
+       
     }
 
     @Override

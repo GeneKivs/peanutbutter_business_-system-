@@ -22,7 +22,7 @@ public class ProductResponseDto {
         this.productID = id;
     }
 
-    public String productName(){
+    public String getProductName(){
         return productName;
     }
 
